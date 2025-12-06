@@ -36,7 +36,8 @@ jobs:
           npm install
           npm run build
 
-
+      - name: create database
+        run: php artisan migrate --force
 
       - name: Build NativePHP Windows Executable
         run: php artisan native:build win
