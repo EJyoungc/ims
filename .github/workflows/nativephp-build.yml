@@ -18,7 +18,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: mbstring, intl, fileinfo, openssl, pdo, pdo_mysql, zip, gd, pdo_sqlite, sqlite3, curl, sockets, json, date, xml, base64, bcrypt, bcrypt_sha256, bcrypt_sha512, jwt, uuid, tokenizer, jwt, session, mbstring, iconv, simplexml, dom, xmlreader, xmlwriter, simplexml,
+          extensions: mbstring, intl, fileinfo, openssl, pdo, pdo_mysql, zip, gd, pdo_sqlite, sqlite3, curl, sockets, json, date, xml, tokenizer, session, mbstring, iconv, simplexml, dom, xmlreader, xmlwriter, simplexml,
 
 
 
@@ -31,16 +31,17 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Install Node Dependencies
+      - name: Install Install NativePHP
         run: |
-          npm install
-          npm run build
+          php artisan native:install --force
+
+
 
       - name: create database
         run: php artisan migrate --force
 
       - name: Build NativePHP Windows Executable
-        run: php artisan native:build win
+        run: php artisan native:build win -vvv --force
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
