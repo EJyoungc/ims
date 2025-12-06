@@ -1,0 +1,71 @@
+name: Build NativePHP Windows App
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-windows:
+    name: Build Windows App
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, intl, fileinfo, openssl, pdo, pdo_mysql
+
+      - name: Install Composer Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Node Dependencies
+        run: |
+          npm install
+          npm run build
+
+      - name: Generate App Key
+        run: php artisan key:generate
+
+      - name: Build NativePHP Windows Executable
+        run: php artisan native:build win
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NativePHP-Windows-EXE
+          path: nativephp/electron/dist/*
+          retention-days: 2
+
+  release:
+    name: Create Release
+    needs: build-windows
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Windows Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: NativePHP-Windows-EXE
+          path: app-build
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          files: |
+            app-build/*.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
