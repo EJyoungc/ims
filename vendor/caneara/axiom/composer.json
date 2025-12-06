@@ -1,0 +1,35 @@
+{
+    "name": "mattkingshott/axiom",
+    "description": "A package that provides a library of reusable Laravel validation rules.",
+    "keywords": [
+        "axiom",
+        "php",
+        "laravel",
+        "validation",
+        "rules"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/mattkingshott/axiom",
+    "autoload": {
+        "psr-4": {
+            "Axiom\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Axiom\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": "^7.4|^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "minimum-stability": "stable"
+}
