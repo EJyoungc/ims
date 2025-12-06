@@ -33,7 +33,11 @@ jobs:
 
       - name: Install Install NativePHP
         run: |
-          php artisan native:install 
+
+
+          php artisan native:install
+          npm audit fix
+          npm i
 
 
 
