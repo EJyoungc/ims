@@ -33,7 +33,7 @@ jobs:
 
       - name: Install Install NativePHP
         run: |
-          php artisan native:install --force
+          php artisan native:install 
 
 
 

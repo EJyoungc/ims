@@ -1,5 +1,5 @@
 import {app} from 'electron'
-import NativePHP from 'plugin'
+import NativePHP from '#plugin'
 import path from 'path'
 
 const buildPath = path.resolve(import.meta.dirname, import.meta.env.MAIN_VITE_NATIVEPHP_BUILD_PATH);
