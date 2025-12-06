@@ -17,7 +17,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
           extensions: mbstring, intl, fileinfo, openssl, pdo, pdo_mysql
 
       - name: Install Composer Dependencies
@@ -26,15 +26,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '24'
 
       - name: Install Node Dependencies
         run: |
           npm install
           npm run build
 
-      - name: Generate App Key
-        run: php artisan key:generate
+      # - name: Generate App Key
+        # run: php artisan key:generate
 
       - name: Build NativePHP Windows Executable
         run: php artisan native:build win
@@ -63,7 +63,7 @@ jobs:
         with:
           name: Release ${{ github.ref_name }}
           tag_name: ${{ github.ref_name }}
-          draft: false
+          draft: true
           prerelease: false
           files: |
             app-build/*.exe
