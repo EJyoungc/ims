@@ -18,7 +18,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: mbstring, intl, fileinfo, openssl, pdo, pdo_mysql, zip, gd
+          extensions: mbstring, intl, fileinfo, openssl, pdo, pdo_mysql, zip, gd, pdo_sqlite, sqlite3, curl, sockets, json, date, xml, base64, bcrypt, bcrypt_sha256, bcrypt_sha512, jwt, uuid, tokenizer, jwt, session, mbstring, iconv, simplexml, dom, xmlreader, xmlwriter, simplexml,
 
 
 
