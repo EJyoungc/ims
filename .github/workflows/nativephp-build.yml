@@ -41,7 +41,7 @@ jobs:
         run: php artisan migrate --force
 
       - name: Build NativePHP Windows Executable
-        run: php artisan native:build win -vvv 
+        run: php artisan native:build win x64 -vvv
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
