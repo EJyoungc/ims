@@ -2,6 +2,7 @@
 
 
 
+use App\Livewire\Access\AccessLivewire; // dev by Techlink360
 use App\Livewire\Products\ProductLivewire;
 use App\Livewire\Purchases\PurchaseLivewire;
 use App\Livewire\Suppliers\SupplierLivewire;
@@ -37,8 +38,6 @@ Route::get('/', function () {
 
 Route::get('/setup', UserSetupLivewire::class)->name('setup');
 
-
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -52,12 +51,15 @@ Route::middleware([
     Route::get('/pos', \App\Livewire\Admin\POS\POSLivewire::class)->name('pos');
     Route::get('/returns/print/{id}', [\App\Http\Controllers\ReturnController::class, 'print'])
         ->name('returns.print');
+    Route::get('/profile', \App\Livewire\Profile\ProfileLivewire::class)->name('profile');
+    Route::get('/unauthorized', AccessLivewire::class)->name('unauthorized'); // dev by Techlink360
 
     // ==============================
     // SYSTEM ADMIN ONLY
     // ==============================
-    Route::middleware('role:system')->group(function () {
+    Route::middleware('role:system,owner')->group(function () {
         Route::get('/users', LivewireUsers::class)->name('users'); // only system admin manages users
+        Route::get('/audit-logs', \App\Livewire\Admin\AuditLogs\AuditLogLivewire::class)->name('audit-logs');
     });
 
     // ==============================
@@ -69,6 +71,9 @@ Route::middleware([
         Route::get('/suppliers', SupplierLivewire::class)->name('suppliers');
         Route::get('/purchases', PurchaseLivewire::class)->name('purchases');
         Route::get('/expenses', ExpenseLivewire::class)->name('expenses');
+         Route::get('/sales', SaleLivewire::class)->name('sales');
+        Route::get('/customers', CustomerLivewire::class)->name('customers');
+        Route::get('/returns', ReturnLivewire::class)->name('returns');
 
         // Reports
         Route::get('/reports/sales', ReportSalesLivewire::class)->name('reports.sales');
@@ -84,7 +89,6 @@ Route::middleware([
         Route::get('/customers', CustomerLivewire::class)->name('customers');
         Route::get('/returns', ReturnLivewire::class)->name('returns');
     });
-
 
     // Route::get('/dashboard', DashboardLivewire::class)->name('dashboard');
     // Route::get('/users', LivewireUsers::class)->name('users');

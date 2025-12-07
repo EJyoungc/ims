@@ -24,7 +24,9 @@ class RoleMiddleware
 
         // Check if user role is allowed
         if (!in_array($user->role, $roles)) {
-            abort(403, 'You are not authorized to access this page.');
+            // dev by Techlink360
+            // Redirect to the unauthorized page instead of aborting with 403
+            return redirect()->route('unauthorized');
         }
 
         return $next($request);

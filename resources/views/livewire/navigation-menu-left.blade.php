@@ -14,7 +14,8 @@
                 <img src="{{ asset('dist/img/user9-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ Auth::user()->name }} <span class="badge bg-purple" >{{ Auth::user()->role  }}</span>  </a>
+                <a href="{{ route('profile') }}" class="d-block">{{ Auth::user()->name }}
+                <span class="badge bg-purple" >{{ Auth::user()->role  }}</span>  </a>
 
             </div>
         </div>
@@ -33,6 +34,7 @@
                     </a>
                 </li>
 
+                @if(in_array(Auth::user()->role, ['owner', 'system']))
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon ti ti-box"></i>
@@ -68,8 +70,9 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
-
+                @if(in_array(Auth::user()->role, ['seller', 'owner', 'system']))
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon ti ti-shopping-cart"></i>
@@ -105,14 +108,18 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
+                @if(in_array(Auth::user()->role, ['owner', 'system']))
                 <li class="nav-item">
                     <a href="{{ route('expenses') }}" class="nav-link">
                         <i class="nav-icon ti ti-credit-card"></i>
                         <p>Expenses</p>
                     </a>
                 </li>
+                @endif
 
+                @if(in_array(Auth::user()->role, ['owner', 'system']))
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon ti ti-chart-line"></i>
@@ -142,7 +149,9 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
+                @if(in_array(Auth::user()->role, ['system', 'owner']))
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon ti ti-users"></i>
@@ -158,9 +167,18 @@
                                 <p>All users</p>
                             </a>
                         </li>
-
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('audit-logs') }}" class="nav-link">
+                        <i class="nav-icon ti ti-list"></i>
+                        <p>
+                            Audit Logs
+                        </p>
+                    </a>
+                </li>
+                @endif
+
             <li class="nav-item">
                 <form action="{{ route('logout') }}" method="POST" id="logout">
                     @csrf
