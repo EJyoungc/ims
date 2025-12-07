@@ -31,8 +31,5 @@ class Supplier extends Model
         'is_blacklisted',
     ];
 
-    public function purchaseItems()
-    {
-        return $this->hasMany(PurchaseItem::class, 'supplier_id');
-    }
+    
 }

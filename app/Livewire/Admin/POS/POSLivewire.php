@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Admin\POS;
 
+use App\Models\AuditLog;
 use App\Models\Customer;
 use App\Models\Product; // dev by Techlink360: Import the Product model
 use App\Models\Sale; // dev by Techlink360: Import the Sale model
 use App\Models\SaleItem; // dev by Techlink360: Import the SaleItem model
 use Illuminate\Support\Facades\Auth; // dev by Techlink360: Import Auth facade
+use Illuminate\Support\Facades\Cache;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -37,10 +39,13 @@ class POSLivewire extends Component
     // dev by Techlink360: Livewire lifecycle hook to update search results
     public function updatedSearch($value)
     {
-        if (strlen($value) > 2) { // Only search if the term is long enough
-            $this->searchResults = Product::where('name', 'like', '%' . $value . '%')
-                                        ->orWhere('barcode', 'like', '%' . $value . '%')
-                                        ->get();
+        if (!empty($value)) {
+            $cacheKey = 'pos_search_' . md5($value);
+            $this->searchResults = Cache::remember($cacheKey, now()->addMinutes(5), function () use ($value) {
+                return Product::where('name', 'like', '%' . $value . '%')
+                              ->orWhere('barcode', 'like', '%' . $value . '%')
+                              ->get();
+            });
         } else {
             $this->searchResults = [];
         }
@@ -83,15 +88,28 @@ class POSLivewire extends Component
         $this->search = ''; // Clear search after adding
         $this->searchResults = [];
         $this->calculateTotal(); // Recalculate total
+        AuditLog::create([
+            'action' => 'addItemToCart',
+            'table_name' => 'sales',
+            'user_id' => auth()->id(),
+            'details' => 'Added product ' . $product->name . ' to POS cart.'
+        ]);
         $this->alert('success', 'Product added to cart!');
     }
 
     // dev by Techlink360: Remove item from cart
     public function removeItemFromCart($index)
     {
+        $removed_item = $this->cartItems[$index];
         unset($this->cartItems[$index]);
         $this->cartItems = array_values($this->cartItems); // Re-index array
         $this->calculateTotal();
+        AuditLog::create([
+            'action' => 'removeItemFromCart',
+            'table_name' => 'sales',
+            'user_id' => auth()->id(),
+            'details' => 'Removed product ' . $removed_item['name'] . ' from POS cart.'
+        ]);
         $this->alert('info', 'Product removed from cart!');
     }
 
@@ -114,6 +132,12 @@ class POSLivewire extends Component
         }
 
         $this->cartItems[$index]['quantity'] = $newQuantity;
+        AuditLog::create([
+            'action' => 'incrementQuantity',
+            'table_name' => 'sales',
+            'user_id' => auth()->id(),
+            'details' => 'Incremented quantity for product ' . $this->cartItems[$index]['name'] . ' in POS cart.'
+        ]);
         $this->calculateTotal();
     }
 
@@ -125,6 +149,12 @@ class POSLivewire extends Component
         } else {
             $this->removeItemFromCart($index); // Remove if quantity becomes 0
         }
+        AuditLog::create([
+            'action' => 'decrementQuantity',
+            'table_name' => 'sales',
+            'user_id' => auth()->id(),
+            'details' => 'Decremented quantity for product ' . $this->cartItems[$index]['name'] . ' in POS cart.'
+        ]);
         $this->calculateTotal();
     }
 
@@ -192,6 +222,13 @@ class POSLivewire extends Component
                 'change' => $this->change,
             ];
 
+            AuditLog::create([
+                'action' => 'pay',
+                'table_name' => 'sales',
+                'record_id' => $sale->id,
+                'user_id' => auth()->id(),
+            ]);
+
             $this->alert('success', 'Sale completed successfully!');
             $this->clearSale(); // Clear cart after sale
             // dev by Techlink360: Dispatch event to show receipt or print
@@ -214,6 +251,11 @@ class POSLivewire extends Component
         $this->paymentMethod = 'cash';
         $this->amount_paid = null;
         $this->change = 0;
+        AuditLog::create([
+            'action' => 'clearSale',
+            'table_name' => 'sales',
+            'user_id' => auth()->id(),
+        ]);
         // Keep receipt for display until user closes it or new sale starts
     }
 
@@ -222,6 +264,11 @@ class POSLivewire extends Component
     {
         $this->reset(['name', 'email', 'phone', 'address']);
         $this->customerModal = true;
+        AuditLog::create([
+            'action' => 'openCustomerModal',
+            'table_name' => 'customers',
+            'user_id' => auth()->id(),
+        ]);
     }
 
     // dev by Techlink360: Close the customer creation modal
@@ -245,6 +292,13 @@ class POSLivewire extends Component
             'email' => $this->email,
             'phone' => $this->phone,
             'address' => $this->address,
+        ]);
+
+        AuditLog::create([
+            'action' => 'store',
+            'table_name' => 'customers',
+            'record_id' => $customer->id,
+            'user_id' => auth()->id(),
         ]);
 
         $this->customerId = $customer->id;

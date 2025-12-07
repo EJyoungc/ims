@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Purchases;
 
+use App\Models\AuditLog;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
@@ -55,14 +56,28 @@ class PurchaseLivewire extends Component
             'sub_total' => $this->quantity * $this->cost,
         ];
 
+        AuditLog::create([
+            'action' => 'addItem',
+            'table_name' => 'purchases',
+            'user_id' => auth()->id(),
+            'details' => 'Added product ' . $product->name . ' to purchase.'
+        ]);
+
         $this->calculateTotal();
         $this->reset('product_id', 'quantity', 'cost');
     }
 
     public function removeItem($index)
     {
+        $removed_item = $this->purchase_items[$index];
         unset($this->purchase_items[$index]);
         $this->purchase_items = array_values($this->purchase_items);
+        AuditLog::create([
+            'action' => 'removeItem',
+            'table_name' => 'purchases',
+            'user_id' => auth()->id(),
+            'details' => 'Removed product ' . $removed_item['product_name'] . ' from purchase.'
+        ]);
         $this->calculateTotal();
     }
 
@@ -96,6 +111,13 @@ class PurchaseLivewire extends Component
             $product->save();
         }
 
+        AuditLog::create([
+            'action' => 'store',
+            'table_name' => 'purchases',
+            'record_id' => $purchase->id,
+            'user_id' => auth()->id(),
+        ]);
+
         $this->alert('success', 'Purchase created successfully.');
         $this->reset();
         $this->mount();
@@ -122,6 +144,12 @@ class PurchaseLivewire extends Component
                 'sub_total' => $item->quantity * $item->cost,
             ];
         }
+        AuditLog::create([
+            'action' => 'edit',
+            'table_name' => 'purchases',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
     }
 
     public function delete($id)
@@ -142,6 +170,12 @@ class PurchaseLivewire extends Component
         }
 
         $purchase->delete();
+        AuditLog::create([
+            'action' => 'delete',
+            'table_name' => 'purchases',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
         $this->alert('success', 'Purchase deleted successfully.');
     }
 
@@ -156,6 +190,12 @@ class PurchaseLivewire extends Component
     {
         $this->selected_purchase = Purchase::with('supplier', 'creator', 'items.product')->findOrFail($id);
         $this->view_modal = true;
+        AuditLog::create([
+            'action' => 'view',
+            'table_name' => 'purchases',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
     }
 
     /**

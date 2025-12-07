@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Setup;
 
+use App\Models\AuditLog;
 use Livewire\Component;
 use App\Models\Setting;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -105,6 +106,13 @@ class SetupLivewire extends Component
                 'allow_negative_stock' => $this->allow_negative_stock ? 1 : 0,
             ]
         );
+
+        // AuditLog::create([
+        //     'action' => 'update',
+        //     'table_name' => 'settings',
+        //     'record_id' => $settings->id,
+        //     'user_id' => auth()->id(),
+        // ]);
 
         $this->alert('success', 'Settings updated successfully');
     }

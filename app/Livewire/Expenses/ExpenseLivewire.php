@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Expenses;
 
+use App\Models\AuditLog;
 use App\Models\Expense;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -73,7 +74,7 @@ class ExpenseLivewire extends Component
     {
         $this->validate();
 
-        Expense::updateOrCreate(
+        $expense = Expense::updateOrCreate(
             ['id' => $this->expense_id],
             [
                 'description' => $this->description,
@@ -82,6 +83,13 @@ class ExpenseLivewire extends Component
                 'created_by' => Auth::id(),
             ]
         );
+
+        AuditLog::create([
+            'action' => $this->expense_id ? 'update' : 'store',
+            'table_name' => 'expenses',
+            'record_id' => $expense->id,
+            'user_id' => auth()->id(),
+        ]);
 
         $this->alert('success', 'Expense saved successfully.');
         $this->resetForm();
@@ -96,6 +104,12 @@ class ExpenseLivewire extends Component
     public function delete($id)
     {
         Expense::destroy($id);
+        AuditLog::create([
+            'action' => 'delete',
+            'table_name' => 'expenses',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
         $this->alert('success', 'Expense deleted successfully.');
     }
 

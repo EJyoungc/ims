@@ -2,18 +2,17 @@
 
 namespace App\Livewire\Users;
 
+use App\Models\AuditLog;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Support\Str;
 
 class LivewireUsers extends Component
 {
-    use WithFileUploads;
     use WithPagination;
     use LivewireAlert;
     protected $paginationTheme = 'bootstrap';
@@ -23,7 +22,7 @@ class LivewireUsers extends Component
     public $folder = 'all';
 
     //form
-    public $name, $email, $photo, $gender, $role, $password, $status, $slug;
+    public $name, $email, $gender, $role, $password, $status, $slug;
 
     /**
      * dev by Techlink360
@@ -52,7 +51,7 @@ class LivewireUsers extends Component
      */
     public function create()
     {
-        $this->reset(['name', 'email', 'photo', 'gender', 'role', 'password', 'status', 'slug']);
+        $this->reset(['name', 'email', 'gender', 'role', 'password', 'status', 'slug']);
         $this->folder = 'create';
         $this->password = "AA123";
         $this->status = true; // Default status to active
@@ -84,6 +83,13 @@ class LivewireUsers extends Component
         $u->password = Hash::make($this->password);
         $u->save();
 
+        AuditLog::create([
+            'action' => 'store',
+            'table_name' => 'users',
+            'record_id' => $u->id,
+            'user_id' => auth()->id(),
+        ]);
+
         $this->reset(['name', 'email', 'gender', 'role', 'status', 'slug', 'folder']);
         $this->alert('success', 'User successfully added!');
     }
@@ -100,6 +106,12 @@ class LivewireUsers extends Component
         $u = User::find($id);
         $u->status = true;
         $u->save();
+        AuditLog::create([
+            'action' => 'activate',
+            'table_name' => 'users',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
         $this->alert('success', 'successfully activated');
     }
 
@@ -116,46 +128,16 @@ class LivewireUsers extends Component
         $u = User::find($id);
         $u->status = false;
         $u->save();
+        AuditLog::create([
+            'action' => 'deactivate',
+            'table_name' => 'users',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
         $this->alert('success', 'successfully deactivated');
     }
 
-    /**
-     * dev by Techlink360
-     * Update the user's profile photo.
-     *
-     * @return void
-     */
-    public function updatedPhoto()
-    {
-        $this->validate([
-            'photo' => 'required|image',
-        ]);
-
-        if ($this->user->profile_photo_path) {
-            Storage::delete($this->user->profile_photo_path);
-        }
-
-        $this->user->profile_photo_path = $this->photo->store('images');
-        $this->user->save();
-        $this->alert('success', 'successfully upload');
-        $this->reset('photo');
-    }
-
-    /**
-     * dev by Techlink360
-     * Remove the user's profile photo.
-     *
-     * @return void
-     */
-    public function removeimage()
-    {
-        if ($this->user->profile_photo_path) {
-            Storage::delete($this->user->profile_photo_path);
-            $this->user->profile_photo_path = "";
-            $this->user->save();
-            $this->alert('success', 'successfully removed');
-        }
-    }
+    
 
     /**
      * dev by Techlink360
@@ -175,6 +157,7 @@ class LivewireUsers extends Component
         $this->role = $this->user->role;
         $this->gender = $this->user->gender;
         $this->status = $this->user->status;
+        $this->password = '';
     }
 
     /**
@@ -203,6 +186,7 @@ class LivewireUsers extends Component
             'role' => 'required|string',
             'gender' => 'required',
             'status' => 'boolean',
+            'password' => 'nullable|string',
         ]);
 
         $this->user->name = $this->name;
@@ -211,7 +195,17 @@ class LivewireUsers extends Component
         $this->user->role = $this->role;
         $this->user->gender = $this->gender;
         $this->user->status = $this->status;
+        if ($this->password) {
+            $this->user->password = Hash::make($this->password);
+        }
         $this->user->save();
+
+        AuditLog::create([
+            'action' => 'update',
+            'table_name' => 'users',
+            'record_id' => $this->user->id,
+            'user_id' => auth()->id(),
+        ]);
 
         $this->alert('success', 'Updated');
     }
@@ -226,10 +220,13 @@ class LivewireUsers extends Component
     public function delete($id)
     {
         $u = User::find($id);
-        if ($u->profile_photo_path) {
-            Storage::delete($u->profile_photo_path);
-        }
         $u->delete();
+        AuditLog::create([
+            'action' => 'delete',
+            'table_name' => 'users',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
         $this->alert('success', 'User successfully deleted!');
     }
 

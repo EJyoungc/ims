@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Returns;
 
+use App\Models\AuditLog;
 use App\Models\Returns; // dev by Techlink360: Import the Returns model
 use App\Models\Customer; // dev by Techlink360: Import the Customer model
 use Illuminate\Support\Facades\Auth; // dev by Techlink360: Import Auth facade
@@ -63,6 +64,12 @@ class ReturnLivewire extends Component
             $return->status = 'approved';
             $return->approved_by = Auth::id();
             $return->save();
+            AuditLog::create([
+                'action' => 'approve',
+                'table_name' => 'returns',
+                'record_id' => $returnId,
+                'user_id' => auth()->id(),
+            ]);
             $this->alert('success', 'Return approved successfully!');
             $this->dispatch('refresh');
         } else {
@@ -86,6 +93,12 @@ class ReturnLivewire extends Component
             $return->status = 'rejected';
             $return->approved_by = Auth::id(); // Record who rejected
             $return->save();
+            AuditLog::create([
+                'action' => 'reject',
+                'table_name' => 'returns',
+                'record_id' => $returnId,
+                'user_id' => auth()->id(),
+            ]);
             $this->alert('success', 'Return rejected successfully!');
             $this->dispatch('refresh');
         } else {
@@ -102,12 +115,23 @@ class ReturnLivewire extends Component
     {
         $this->selected_return = Returns::with('sale.customer', 'creator', 'approver', 'returnItems.saleItem.product')->find($id);
         $this->view_modal = true;
+        AuditLog::create([
+            'action' => 'view',
+            'table_name' => 'returns',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
     }
 
     public function openNewReturnModal()
     {
         $this->sales = \App\Models\Sale::with('customer')->latest()->get();
         $this->new_return_modal = true;
+        AuditLog::create([
+            'action' => 'openNewReturnModal',
+            'table_name' => 'returns',
+            'user_id' => auth()->id(),
+        ]);
     }
 
     public function updatedSelectedSaleId($saleId)
@@ -188,6 +212,13 @@ class ReturnLivewire extends Component
         $sale->total_amount -= $refund_amount;
         $sale->save();
 
+        AuditLog::create([
+            'action' => 'store',
+            'table_name' => 'returns',
+            'record_id' => $return->id,
+            'user_id' => auth()->id(),
+        ]);
+
         $this->alert('success', 'Product returned successfully.');
         $this->new_return_modal = false;
         $this->reset('selected_sale_id', 'selected_product_id', 'return_quantity', 'return_reason', 'admin_email', 'admin_password');
@@ -205,6 +236,12 @@ class ReturnLivewire extends Component
     public function printReturn($id)
     {
         $this->dispatch('print-return', $id);
+        AuditLog::create([
+            'action' => 'print',
+            'table_name' => 'returns',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
     }
 
 

@@ -23,7 +23,7 @@ class ProductLivewire extends Component
 
     public $modal = false;
     public $productId;
-    public $name, $category_id, $brand, $purchase_price, $selling_price, $quantity, $reorder_level, $barcode, $description;
+    public $name, $category_id, $brand, $purchase_price, $selling_price, $quantity, $reorder_level = 0, $barcode, $description;
     public $search = '';
     public $category_filter = '';
     public $show_trashed = false;
@@ -35,7 +35,7 @@ class ProductLivewire extends Component
         'purchase_price' => 'required|numeric|min:0',
         'selling_price' => 'required|numeric|gt:purchase_price',
         'quantity' => 'required|integer|min:0',
-        'reorder_level' => 'nullable|integer|min:0',
+        'reorder_level' => 'require|nullable|integer|min:0',
         'barcode' => 'nullable|string|max:255|unique:products,barcode,',
         'description' => 'nullable|string|max:500',
     ];
@@ -58,6 +58,11 @@ class ProductLivewire extends Component
     {
         $this->cancel();
         $this->modal = true;
+        AuditLog::create([
+            'action' => 'create',
+            'table_name' => 'products',
+            'user_id' => auth()->id(),
+        ]);
         $this->dispatch('modal-open');
     }
 
@@ -80,6 +85,12 @@ class ProductLivewire extends Component
         $this->barcode = $product->barcode;
         $this->description = $product->description;
         $this->modal = true;
+        AuditLog::create([
+            'action' => 'edit',
+            'table_name' => 'products',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
         $this->dispatch('modal-open');
     }
 

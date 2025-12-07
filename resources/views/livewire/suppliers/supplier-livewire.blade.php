@@ -75,7 +75,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Contact</th>
-                                            <th>Purchases</th>
+                                            
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
@@ -93,7 +93,6 @@
                                                     <br>
                                                     <small>{{ $supplier->email }} | {{ $supplier->phone }}</small>
                                                 </td>
-                                                <td>{{ $supplier->purchase_items_count }}</td>
                                                 <td>
                                                     @if($supplier->trashed())
                                                         <span class="badge badge-danger">Deactivated</span>
@@ -117,7 +116,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="5" class="text-center">No suppliers found.</td>
+                                                <td colspan="4" class="text-center">No suppliers found.</td>
                                             </tr>
                                         @endforelse
                                     </tbody>

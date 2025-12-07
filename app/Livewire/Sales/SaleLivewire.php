@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Sales;
 
+use App\Models\AuditLog;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Sale;
@@ -92,6 +93,13 @@ class SaleLivewire extends Component
             ];
         }
 
+        AuditLog::create([
+            'action' => 'addItem',
+            'table_name' => 'sales',
+            'user_id' => auth()->id(),
+            'details' => 'Added product ' . $product->name . ' to sale.'
+        ]);
+
         $this->calculateTotal();
         $this->reset('product_id', 'quantity');
     }
@@ -103,8 +111,15 @@ class SaleLivewire extends Component
      */
     public function removeItem($index)
     {
+        $removed_item = $this->sale_items[$index];
         unset($this->sale_items[$index]);
         $this->sale_items = array_values($this->sale_items);
+        AuditLog::create([
+            'action' => 'removeItem',
+            'table_name' => 'sales',
+            'user_id' => auth()->id(),
+            'details' => 'Removed product ' . $removed_item['product_name'] . ' from sale.'
+        ]);
         $this->calculateTotal();
     }
 
@@ -179,6 +194,13 @@ class SaleLivewire extends Component
             $product->save();
         }
 
+        AuditLog::create([
+            'action' => $this->sale_id ? 'update' : 'store',
+            'table_name' => 'sales',
+            'record_id' => $sale->id,
+            'user_id' => auth()->id(),
+        ]);
+
         $this->alert('success', 'Sale saved successfully.');
         $this->resetForm();
         $this->mount();
@@ -210,6 +232,12 @@ class SaleLivewire extends Component
                 'total_price' => $item->total_price,
             ];
         }
+        AuditLog::create([
+            'action' => 'edit',
+            'table_name' => 'sales',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
     }
 
     /**
@@ -234,6 +262,12 @@ class SaleLivewire extends Component
         }
 
         $sale->delete();
+        AuditLog::create([
+            'action' => 'delete',
+            'table_name' => 'sales',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
         $this->alert('success', 'Sale deleted successfully.');
     }
 
@@ -246,6 +280,12 @@ class SaleLivewire extends Component
     {
         $this->selected_sale = Sale::with('customer', 'creator', 'items.product')->find($id);
         $this->view_modal = true;
+        AuditLog::create([
+            'action' => 'view',
+            'table_name' => 'sales',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
     }
 
     /**
@@ -256,6 +296,12 @@ class SaleLivewire extends Component
     public function printReceipt($id)
     {
         $this->dispatch('print-receipt', $id);
+        AuditLog::create([
+            'action' => 'print',
+            'table_name' => 'sales',
+            'record_id' => $id,
+            'user_id' => auth()->id(),
+        ]);
     }
 
     /**
@@ -278,6 +324,13 @@ class SaleLivewire extends Component
         $this->return_item_id = $itemId;
         $item = $this->selected_sale->items->firstWhere('id', $itemId);
         $this->return_quantity = $item->quantity;
+        AuditLog::create([
+            'action' => 'returnItem',
+            'table_name' => 'sales',
+            'record_id' => $itemId,
+            'user_id' => auth()->id(),
+            'details' => 'Initiated return for item ' . $item->product->name
+        ]);
     }
 
     /**
@@ -348,6 +401,13 @@ class SaleLivewire extends Component
         $sale = Sale::find($item->sale_id);
         $sale->total_amount -= $refund_amount;
         $sale->save();
+
+        AuditLog::create([
+            'action' => 'confirmReturn',
+            'table_name' => 'returns',
+            'record_id' => $return->id,
+            'user_id' => auth()->id(),
+        ]);
 
         $this->alert('success', 'Product returned successfully.');
         $this->reset('return_item_id', 'return_quantity', 'admin_email', 'admin_password', 'return_reason');

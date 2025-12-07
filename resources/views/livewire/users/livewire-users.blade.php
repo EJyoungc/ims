@@ -60,10 +60,12 @@
                                             @forelse ($u as $item)
                                                 @if ($item->role != 'system')
                                                     <tr>
-                                                        <td scope="row"><img
+                                                        <td scope="row">
+                                                            {{-- <img
                                                                 src="@if ($item->profile_photo_path == '') {{ asset('assets/uploads/images/face-0.jpg') }}  @else{{ asset('storage/' . $item->profile_photo_path) }} @endif"
                                                                 class="rounded" height="30" width="30"
-                                                                alt="">
+                                                                alt=""> --}}
+                                                            <i class="fa fa-user" ></i>
                                                         </td>
 
                                                         <td>{{ $item->name }}</td>
@@ -139,67 +141,27 @@
             @if ($folder == 'edit')
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="d-flex justify-content-end">
-
-                            <div class="form-group">
-                                <div class="btn-group">
-                                    {{-- dev by Techlink360: Button to cancel editing and return to all users view --}}
-                                    <button class="btn btn-sm btn-primary form-control" wire:click='cancel'>
-                                        <span wire:loading wire:target="cancel"
-                                            class="spinner-border spinner-border-sm" role="status"
-                                            aria-hidden="true"></span>
-                                        Cancel
-                                    </button>
-
-
-                                </div>
-                            </div>
-
-                        </div>
                         <div class="card">
                             <div class="card-body">
-                                <div class="h3">Edit</div>
-                                <form wire:submit.prevent='update'>
-                                    <div class="row">
-                                        <div class="form-group col-lg-6">
-                                            <div class="text-center">
-                                                <div class="col-12">
-                                                    {{-- dev by Techlink360: User profile photo --}}
-                                                    <img src="@if ($user->profile_photo_path == null) {{ asset('assets/uploads/images/face-0.jpg') }}  @else{{ asset('storage/' . $user->profile_photo_path) }} @endif"
-                                                        alt="" class="rounded" height="50"
-                                                        width="50" srcset="">
-                                                    <div class="d-flex">
-                                                        <div x-data="{ isUploading: false, progress: 0 }"
-                                                            x-on:livewire-upload-start="isUploading = true"
-                                                            x-on:livewire-upload-finish="isUploading = false"
-                                                            x-on:livewire-upload-error="isUploading = false"
-                                                            x-on:livewire-upload-progress="progress = $event.detail.progress"
-                                                            class="pr-1">
-                                                            {{-- dev by Techlink360: Input to upload new profile photo --}}
-                                                            <input wire:model.defer="photo" type="file"
-                                                                class="form-control @error('photo') is-invalid @enderror">
-                                                            <div x-show="isUploading">
-                                                                <progress max="100"
-                                                                    x-bind:value="progress"></progress>
-                                                            </div>
-                                                            @error('photo')
-                                                                <span class="text-danger">
-                                                                    {{ $message }}
-                                                                </span>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="pl-1">
-                                                            @if (!$user->profile_photo_path == '')
-                                                                {{-- dev by Techlink360: Button to remove profile photo --}}
-                                                                <button wire:click='removeimage'
-                                                                    class="btn btn-sm btn-danger">remove</button>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="h3">Edit User</div>
 
-                                            </div>
+                                    <div class="form-group">
+                                        <div class="btn-group">
+                                            {{-- dev by Techlink360: Button to cancel editing and return to all users view --}}
+                                            <button class="btn btn-sm btn-primary form-control"
+                                                wire:click='cancel'>
+                                                <span wire:loading wire:target="cancel"
+                                                    class="spinner-border spinner-border-sm" role="status"
+                                                    aria-hidden="true"></span>
+                                                Back
+                                            </button>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <form wire:submit.prevent='update()'>
+                                    <div class="row">
                                         <div class="form-group col-sm-12 col-lg-6">
                                             <label for="">Full Name</label>
                                             <input type="text" wire:model.defer="name"
@@ -218,8 +180,7 @@
                                         </div>
                                         <div class="form-group col-sm-12 col-lg-6">
                                             <label for="">Role</label>
-
-                                            <select type="text" wire:model.defer="role"
+                                            <select type="text" wire:model.live="role"
                                                 class="form-control @error('role') is-invalid @enderror">
                                                 <option value="">Select role</option>
                                                 @foreach ($this->allRoles as $availableRole)
@@ -238,6 +199,7 @@
                                             <label for="">Gender</label>
                                             <select type="text" wire:model.defer="gender"
                                                 class="form-control @error('gender') is-invalid @enderror">
+                                                <option value="">Select Gender</option>
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
                                             </select>
@@ -253,6 +215,14 @@
                                                 <option value="0">Inactive</option>
                                             </select>
                                             @error('status')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group col-sm-12 col-lg-6">
+                                            <label for="">Password</label>
+                                            <input type="text" wire:model.defer="password"
+                                                class="form-control @error('password') is-invalid @enderror" placeholder="Leave blank to keep current password">
+                                            @error('password')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>

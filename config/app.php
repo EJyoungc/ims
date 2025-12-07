@@ -128,6 +128,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Platform State
+    |--------------------------------------------------------------------------
+    |
+    | This value determines if the application is running in 'web' or 'standalone'
+    | mode. This can affect certain behaviors or features.
+    | dev by Techlink360
+    */
+
+    'platform_state' => env('PLATFORM_STATE', 'web'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Maintenance Mode Driver
     |--------------------------------------------------------------------------
     |

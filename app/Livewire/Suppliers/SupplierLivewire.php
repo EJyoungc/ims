@@ -161,7 +161,7 @@ class SupplierLivewire extends Component
      */
     public function render()
     {
-        $query = Supplier::withCount('purchaseItems');
+        $query = Supplier::query();
 
         if ($this->show_trashed) {
             $query->onlyTrashed();

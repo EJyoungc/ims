@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Setup;
 
+use App\Models\AuditLog;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
@@ -44,6 +45,14 @@ class UserSetupLivewire extends Component
             $user->role = 'system';
             $user->password = Hash::make('root');
             $user->save();
+
+            // AuditLog::create([
+            //     'action' => 'store',
+            //     'table_name' => 'users',
+            //     'record_id' => $user->id,
+            //     'user_id' => auth()->id(), // Assuming an admin user is setting this up
+            //     'details' => 'Created initial system admin user during setup.'
+            // ]);
         }
 
         $this->validate([
@@ -58,6 +67,14 @@ class UserSetupLivewire extends Component
             $user->email = $this->email;
             $user->password = Hash::make($this->password);
             $user->save();
+
+        // AuditLog::create([
+        //     'action' => 'store',
+        //     'table_name' => 'users',
+        //     'record_id' => $user->id,
+        //     'user_id' => auth()->id(), // Assuming an admin user is setting this up
+        //     'details' => 'Created owner user during setup.'
+        // ]);
 
         $this->alert('success', 'User successfully added!');
         sleep(5);

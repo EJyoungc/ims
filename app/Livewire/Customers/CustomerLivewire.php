@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Customers;
 
+use App\Models\AuditLog;
 use App\Models\Customer;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -51,6 +52,12 @@ class CustomerLivewire extends Component
         $customer = Customer::find($id);
         if ($customer) {
             $customer->delete();
+            AuditLog::create([
+                'action' => 'delete',
+                'table_name' => 'customers',
+                'record_id' => $id,
+                'user_id' => auth()->id(),
+            ]);
             $this->alert('success', 'Customer deleted successfully');
             $this->dispatch('refresh');
         }
@@ -71,11 +78,18 @@ class CustomerLivewire extends Component
             'address' => 'nullable|string',
         ]);
 
-        Customer::updateOrCreate(['id' => $this->id], [
+        $customer = Customer::updateOrCreate(['id' => $this->id], [
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
             'address' => $this->address,
+        ]);
+
+        AuditLog::create([
+            'action' => $this->id ? 'update' : 'store',
+            'table_name' => 'customers',
+            'record_id' => $customer->id,
+            'user_id' => auth()->id(),
         ]);
 
         $this->alert('success', 'Customer saved successfully');
