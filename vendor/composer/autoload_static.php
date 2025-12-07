@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1a9c475b17fbb0103baa6fe6776058b7
+class ComposerStaticInit8d3232f2dfe10bd57b74de57177de81f
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -18,25 +18,25 @@ class ComposerStaticInit1a9c475b17fbb0103baa6fe6776058b7
         '662a729f963d39afe703c9d9b7ab4a8c' => __DIR__ . '/..' . '/symfony/polyfill-php83/bootstrap.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '47e1160838b5e5a10346ac4084b58c23' => __DIR__ . '/..' . '/laravel/prompts/src/helpers.php',
-        '35a6ad97d21e794e7e22a17d806652e4' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Functions.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+        '35a6ad97d21e794e7e22a17d806652e4' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Functions.php',
+        '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
-        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
-        'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
-        '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
+        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        '3109cb1a231dcd04bee1f9f620d46975' => __DIR__ . '/..' . '/paragonie/sodium_compat/autoload.php',
+        '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
+        'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
+        '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
         '476ca15b8d69b04665cd879be9cb4c68' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/functions.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f57d353b41eb2e234b26064d63d8c5dd' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Filesystem/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
-        '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
-        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        '3109cb1a231dcd04bee1f9f620d46975' => __DIR__ . '/..' . '/paragonie/sodium_compat/autoload.php',
-        '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
-        '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
         '17d016dc52a631c1e74d2eb8fdd57342' => __DIR__ . '/..' . '/laravel/helpers/src/helpers.php',
         'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
         'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
@@ -157,8 +157,6 @@ class ComposerStaticInit1a9c475b17fbb0103baa6fe6776058b7
             'League\\Config\\' => 14,
             'League\\CommonMark\\' => 18,
             'Laravel\\Tinker\\' => 15,
-            'Laravel\\Telescope\\Database\\Factories\\' => 37,
-            'Laravel\\Telescope\\' => 18,
             'Laravel\\SerializableClosure\\' => 28,
             'Laravel\\Sanctum\\' => 16,
             'Laravel\\Sail\\' => 13,
@@ -441,8 +439,8 @@ class ComposerStaticInit1a9c475b17fbb0103baa6fe6776058b7
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -498,8 +496,8 @@ class ComposerStaticInit1a9c475b17fbb0103baa6fe6776058b7
         ),
         'Nette\\' => 
         array (
-            0 => __DIR__ . '/..' . '/nette/schema/src',
-            1 => __DIR__ . '/..' . '/nette/utils/src',
+            0 => __DIR__ . '/..' . '/nette/utils/src',
+            1 => __DIR__ . '/..' . '/nette/schema/src',
         ),
         'Native\\Desktop\\' => 
         array (
@@ -552,14 +550,6 @@ class ComposerStaticInit1a9c475b17fbb0103baa6fe6776058b7
         'Laravel\\Tinker\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
-        ),
-        'Laravel\\Telescope\\Database\\Factories\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel/telescope/database/factories',
-        ),
-        'Laravel\\Telescope\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel/telescope/src',
         ),
         'Laravel\\SerializableClosure\\' => 
         array (
@@ -4344,87 +4334,6 @@ class ComposerStaticInit1a9c475b17fbb0103baa6fe6776058b7
         'Laravel\\SerializableClosure\\Support\\ReflectionClosure' => __DIR__ . '/..' . '/laravel/serializable-closure/src/Support/ReflectionClosure.php',
         'Laravel\\SerializableClosure\\Support\\SelfReference' => __DIR__ . '/..' . '/laravel/serializable-closure/src/Support/SelfReference.php',
         'Laravel\\SerializableClosure\\UnsignedSerializableClosure' => __DIR__ . '/..' . '/laravel/serializable-closure/src/UnsignedSerializableClosure.php',
-        'Laravel\\Telescope\\Actions\\UninstallAction' => __DIR__ . '/..' . '/laravel/telescope/src/Actions/UninstallAction.php',
-        'Laravel\\Telescope\\AuthorizesRequests' => __DIR__ . '/..' . '/laravel/telescope/src/AuthorizesRequests.php',
-        'Laravel\\Telescope\\Avatar' => __DIR__ . '/..' . '/laravel/telescope/src/Avatar.php',
-        'Laravel\\Telescope\\Console\\ClearCommand' => __DIR__ . '/..' . '/laravel/telescope/src/Console/ClearCommand.php',
-        'Laravel\\Telescope\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/telescope/src/Console/InstallCommand.php',
-        'Laravel\\Telescope\\Console\\PauseCommand' => __DIR__ . '/..' . '/laravel/telescope/src/Console/PauseCommand.php',
-        'Laravel\\Telescope\\Console\\PruneCommand' => __DIR__ . '/..' . '/laravel/telescope/src/Console/PruneCommand.php',
-        'Laravel\\Telescope\\Console\\PublishCommand' => __DIR__ . '/..' . '/laravel/telescope/src/Console/PublishCommand.php',
-        'Laravel\\Telescope\\Console\\ResumeCommand' => __DIR__ . '/..' . '/laravel/telescope/src/Console/ResumeCommand.php',
-        'Laravel\\Telescope\\Contracts\\ClearableRepository' => __DIR__ . '/..' . '/laravel/telescope/src/Contracts/ClearableRepository.php',
-        'Laravel\\Telescope\\Contracts\\EntriesRepository' => __DIR__ . '/..' . '/laravel/telescope/src/Contracts/EntriesRepository.php',
-        'Laravel\\Telescope\\Contracts\\PrunableRepository' => __DIR__ . '/..' . '/laravel/telescope/src/Contracts/PrunableRepository.php',
-        'Laravel\\Telescope\\Contracts\\TerminableRepository' => __DIR__ . '/..' . '/laravel/telescope/src/Contracts/TerminableRepository.php',
-        'Laravel\\Telescope\\Database\\Factories\\EntryModelFactory' => __DIR__ . '/..' . '/laravel/telescope/database/factories/EntryModelFactory.php',
-        'Laravel\\Telescope\\EntryResult' => __DIR__ . '/..' . '/laravel/telescope/src/EntryResult.php',
-        'Laravel\\Telescope\\EntryType' => __DIR__ . '/..' . '/laravel/telescope/src/EntryType.php',
-        'Laravel\\Telescope\\EntryUpdate' => __DIR__ . '/..' . '/laravel/telescope/src/EntryUpdate.php',
-        'Laravel\\Telescope\\ExceptionContext' => __DIR__ . '/..' . '/laravel/telescope/src/ExceptionContext.php',
-        'Laravel\\Telescope\\ExtractProperties' => __DIR__ . '/..' . '/laravel/telescope/src/ExtractProperties.php',
-        'Laravel\\Telescope\\ExtractTags' => __DIR__ . '/..' . '/laravel/telescope/src/ExtractTags.php',
-        'Laravel\\Telescope\\ExtractsMailableTags' => __DIR__ . '/..' . '/laravel/telescope/src/ExtractsMailableTags.php',
-        'Laravel\\Telescope\\FormatModel' => __DIR__ . '/..' . '/laravel/telescope/src/FormatModel.php',
-        'Laravel\\Telescope\\Http\\Controllers\\CacheController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/CacheController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\ClientRequestController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/ClientRequestController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\CommandsController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/CommandsController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\DumpController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/DumpController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\EntriesController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/EntriesController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\EntryController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/EntryController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\EventsController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/EventsController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\ExceptionController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/ExceptionController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\GatesController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/GatesController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\HomeController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/HomeController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\LogController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/LogController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\MailController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/MailController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\MailEmlController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/MailEmlController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\MailHtmlController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/MailHtmlController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\ModelsController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/ModelsController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\MonitoredTagController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/MonitoredTagController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\NotificationsController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/NotificationsController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\QueriesController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/QueriesController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\QueueBatchesController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/QueueBatchesController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\QueueController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/QueueController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\RecordingController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/RecordingController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\RedisController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/RedisController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\RequestsController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/RequestsController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\ScheduleController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/ScheduleController.php',
-        'Laravel\\Telescope\\Http\\Controllers\\ViewsController' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Controllers/ViewsController.php',
-        'Laravel\\Telescope\\Http\\Middleware\\Authorize' => __DIR__ . '/..' . '/laravel/telescope/src/Http/Middleware/Authorize.php',
-        'Laravel\\Telescope\\IncomingDumpEntry' => __DIR__ . '/..' . '/laravel/telescope/src/IncomingDumpEntry.php',
-        'Laravel\\Telescope\\IncomingEntry' => __DIR__ . '/..' . '/laravel/telescope/src/IncomingEntry.php',
-        'Laravel\\Telescope\\IncomingExceptionEntry' => __DIR__ . '/..' . '/laravel/telescope/src/IncomingExceptionEntry.php',
-        'Laravel\\Telescope\\Jobs\\ProcessPendingUpdates' => __DIR__ . '/..' . '/laravel/telescope/src/Jobs/ProcessPendingUpdates.php',
-        'Laravel\\Telescope\\ListensForStorageOpportunities' => __DIR__ . '/..' . '/laravel/telescope/src/ListensForStorageOpportunities.php',
-        'Laravel\\Telescope\\RegistersWatchers' => __DIR__ . '/..' . '/laravel/telescope/src/RegistersWatchers.php',
-        'Laravel\\Telescope\\Storage\\DatabaseEntriesRepository' => __DIR__ . '/..' . '/laravel/telescope/src/Storage/DatabaseEntriesRepository.php',
-        'Laravel\\Telescope\\Storage\\EntryModel' => __DIR__ . '/..' . '/laravel/telescope/src/Storage/EntryModel.php',
-        'Laravel\\Telescope\\Storage\\EntryQueryOptions' => __DIR__ . '/..' . '/laravel/telescope/src/Storage/EntryQueryOptions.php',
-        'Laravel\\Telescope\\Telescope' => __DIR__ . '/..' . '/laravel/telescope/src/Telescope.php',
-        'Laravel\\Telescope\\TelescopeApplicationServiceProvider' => __DIR__ . '/..' . '/laravel/telescope/src/TelescopeApplicationServiceProvider.php',
-        'Laravel\\Telescope\\TelescopeServiceProvider' => __DIR__ . '/..' . '/laravel/telescope/src/TelescopeServiceProvider.php',
-        'Laravel\\Telescope\\Watchers\\BatchWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/BatchWatcher.php',
-        'Laravel\\Telescope\\Watchers\\CacheWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/CacheWatcher.php',
-        'Laravel\\Telescope\\Watchers\\ClientRequestWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/ClientRequestWatcher.php',
-        'Laravel\\Telescope\\Watchers\\CommandWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/CommandWatcher.php',
-        'Laravel\\Telescope\\Watchers\\DumpWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/DumpWatcher.php',
-        'Laravel\\Telescope\\Watchers\\EventWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/EventWatcher.php',
-        'Laravel\\Telescope\\Watchers\\ExceptionWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/ExceptionWatcher.php',
-        'Laravel\\Telescope\\Watchers\\FetchesStackTrace' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/FetchesStackTrace.php',
-        'Laravel\\Telescope\\Watchers\\FormatsClosure' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/FormatsClosure.php',
-        'Laravel\\Telescope\\Watchers\\GateWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/GateWatcher.php',
-        'Laravel\\Telescope\\Watchers\\JobWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/JobWatcher.php',
-        'Laravel\\Telescope\\Watchers\\LogWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/LogWatcher.php',
-        'Laravel\\Telescope\\Watchers\\MailWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/MailWatcher.php',
-        'Laravel\\Telescope\\Watchers\\ModelWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/ModelWatcher.php',
-        'Laravel\\Telescope\\Watchers\\NotificationWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/NotificationWatcher.php',
-        'Laravel\\Telescope\\Watchers\\QueryWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/QueryWatcher.php',
-        'Laravel\\Telescope\\Watchers\\RedisWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/RedisWatcher.php',
-        'Laravel\\Telescope\\Watchers\\RequestWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/RequestWatcher.php',
-        'Laravel\\Telescope\\Watchers\\ScheduleWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/ScheduleWatcher.php',
-        'Laravel\\Telescope\\Watchers\\ViewWatcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/ViewWatcher.php',
-        'Laravel\\Telescope\\Watchers\\Watcher' => __DIR__ . '/..' . '/laravel/telescope/src/Watchers/Watcher.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
@@ -9762,10 +9671,10 @@ class ComposerStaticInit1a9c475b17fbb0103baa6fe6776058b7
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1a9c475b17fbb0103baa6fe6776058b7::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1a9c475b17fbb0103baa6fe6776058b7::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit1a9c475b17fbb0103baa6fe6776058b7::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit1a9c475b17fbb0103baa6fe6776058b7::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit8d3232f2dfe10bd57b74de57177de81f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit8d3232f2dfe10bd57b74de57177de81f::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit8d3232f2dfe10bd57b74de57177de81f::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit8d3232f2dfe10bd57b74de57177de81f::$classMap;
 
         }, null, ClassLoader::class);
     }

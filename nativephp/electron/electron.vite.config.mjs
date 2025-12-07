@@ -2,12 +2,6 @@ import { join } from 'path';
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite';
 
 export default defineConfig({
-    //  resolve: {
-    //     alias: {
-    //         // Fix: GitHub Actions cannot resolve "#plugin"
-    //         "#plugin": resolve("nativephp/electron/plugins/index.js"),
-    //     },
-    // },
     main: {
         build: {
             rollupOptions: {

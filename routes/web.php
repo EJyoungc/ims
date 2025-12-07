@@ -35,7 +35,7 @@ Route::get('/', function () {
     return redirect(route('login'));
 });
 
-Route::get('/setup', UserSetupLivewire::class)->name('seup');
+Route::get('/setup', UserSetupLivewire::class)->name('setup');
 
 
 
