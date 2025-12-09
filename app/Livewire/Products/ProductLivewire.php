@@ -35,7 +35,7 @@ class ProductLivewire extends Component
         'purchase_price' => 'required|numeric|min:0',
         'selling_price' => 'required|numeric|gt:purchase_price',
         'quantity' => 'required|integer|min:0',
-        'reorder_level' => 'require|nullable|integer|min:0',
+        'reorder_level' => 'required|nullable|integer|min:0',
         'barcode' => 'nullable|string|max:255|unique:products,barcode,',
         'description' => 'nullable|string|max:500',
     ];

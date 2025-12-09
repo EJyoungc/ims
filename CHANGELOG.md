@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4] - 2025-12-09
+### Fixed
+- Fixed a bug where updating a product's creation and update was fixed .
+
+
+
 ### Added
 - Created AccessLivewire component and view for unauthorized access display.
 - Added '/unauthorized' route for the AccessLivewire component.
