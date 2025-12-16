@@ -5,7 +5,7 @@
           {{-- <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
           <span class="brand-text text- font-weight-light">Dashboard</span>
         </a>
-    
+
         <!-- Sidebar -->
         <div class="sidebar">
           <!-- Sidebar user (optional) -->
@@ -18,7 +18,7 @@
               <span class="badge bg-success text-capitalize  " >{{ Auth::user()->role }}</span>
             </div>
           </div>
-          
+
           <!-- SidebarSearch Form -->
           <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
@@ -30,7 +30,7 @@
               </div>
             </div>
           </div>
-    
+
           @if(Auth::user()->role == "admin")
           <!-- Sidebar Menu -->
           <nav class="mt-2">
@@ -40,46 +40,46 @@
               <li class="nav-item">
                 <a href="{{ route('root') }}" class="nav-link">
                   <i class="nav-icon fa fa-globe "></i>
-                  
+
                   <p>
                     Home Page
-                    
+
                   </p>
                 </a>
-                
+
               </li>
               <li class="nav-item">
-                <a href="{{ route('dashboard') }}" class="nav-link">
+                <a href="{{ route('dashboard') }}" class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Dashboard
-                    
+
                   </p>
                 </a>
-                
+
               </li>
               <li class="nav-item">
-                <a href="{{ route('users') }}" class="nav-link">
-                  
+                <a href="{{ route('users') }}" class="nav-link {{ Route::is('users') ? 'active' : '' }} ">
+
                   <i class=" nav-icon fa fa-users" aria-hidden="true"></i>
                   <p>
                     Users
-                   
+
                   </p>
                 </a>
               </li>
               {{-- <li class="nav-header">Hero</li>
               <li class="nav-item">
-                
+
               </li> --}}
               <li class="nav-header">Blog</li>
               <li class="nav-item">
-                <a href="{{ route('posts') }}" class="nav-link">
-                  
+                <a href="{{ route('posts') }}" class="nav-link {{  }} ">
+
                   <i class=" nav-icon fa fa-coffee" aria-hidden="true"></i>
                   <p>
                     Posts
-                   
+
                   </p>
                 </a>
               </li>
@@ -88,22 +88,22 @@
                   <i class="nav-icon fas fa-copy"></i>
                   <p>
                     Categories
-                    
+
                   </p>
                 </a>
-               
+
               </li>
               <li class="nav-item">
                 <a href="{{ route('tags') }}" class="nav-link">
-                  
-                  
+
+
                   <i class=" nav-icon fa fa-hashtag" aria-hidden="true"></i>
                   <p>
                     Tags
-                    
+
                   </p>
                 </a>
-               
+
               </li>
 
               <li class="nav-header">Home Page</li>
@@ -111,15 +111,15 @@
                 <a href="{{ route('hero') }}" class="nav-link">
                   <i class="fa fa-arrow-up nav-icon " aria-hidden="true"></i>
                   <p>Hero</p>
-                  
+
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('about') }}" class="nav-link">
                   <i class="fa fa-list nav-icon " aria-hidden="true"></i>
                   <p>About</p>
-                  
-                  
+
+
                 </a>
               </li>
               <li class="nav-item">
@@ -127,31 +127,31 @@
                   <i class="fa fa-microphone nav-icon " aria-hidden="true"></i>
                   <p>Testimonials</p>
 
-                  
-                  
+
+
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('whys') }}" class="nav-link">
                   <i class="fa fa-question nav-icon " aria-hidden="true"></i>
                   <p>WHYs</p>
-                  
+
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('partners') }}" class="nav-link">
                   <i class="fa fa-users nav-icon " aria-hidden="true"></i>
                   <p>Partners</p>
-                  
+
                 </a>
               </li>
 
-             
+
               <li class="nav-item">
                 <a href="{{ route('footer') }}" class="nav-link">
                   <i class="fa fa-arrow-down nav-icon " aria-hidden="true"></i>
                   <p>Footer</p>
-                  
+
                 </a>
               </li>
               <li class="nav-header">Intake & Candidates</li>
@@ -168,11 +168,11 @@
                   <p>Programs / Courses</p>
                 </a>
               </li>
-              
-            
+
+
               <li class="nav-item ">
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit();"  class="nav-link">
-                  
+
                   <i class="nav-icon fas fa-door-open"></i>
                   <p class="text-danger" >
                     Logout
@@ -180,9 +180,9 @@
                         @csrf
                     </form>
                   </p>
-                </a>   
+                </a>
               </li>
-              
+
             </ul>
           </nav>
           <!-- /.sidebar-menu -->
@@ -197,52 +197,52 @@
               <li class="nav-item">
                 <a href="{{ route('root') }}" class="nav-link">
                   <i class="nav-icon fa fa-globe "></i>
-                  
+
                   <p>
                     Home Page
-                    
+
                   </p>
                 </a>
-                
+
               </li>
               <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Dashboard
-                    
+
                   </p>
                 </a>
-                
+
               </li>
               {{-- <li class="nav-item">
                 <a href="{{ route('users') }}" class="nav-link">
-                  
+
                   <i class=" nav-icon fa fa-users" aria-hidden="true"></i>
                   <p>
                     Users
-                   
+
                   </p>
                 </a>
               </li>
               <li class="nav-header">Hero</li>
               <li class="nav-item">
                 <a href="{{ route('hero') }}" class="nav-link">
-                  
+
                   <i class="fas fa-image "></i>
                   <p>
-                    Hero Image 
+                    Hero Image
                   </p>
                 </a>
               </li> --}}
               <li class="nav-header">Blog</li>
               <li class="nav-item">
                 <a href="{{ route('posts') }}" class="nav-link">
-                  
+
                   <i class=" nav-icon fa fa-coffee" aria-hidden="true"></i>
                   <p>
                     Posts
-                   
+
                   </p>
                 </a>
               </li>
@@ -251,34 +251,34 @@
                   <i class="nav-icon fas fa-copy"></i>
                   <p>
                     Categories
-                    
+
                   </p>
                 </a>
-               
+
               </li> --}}
               {{-- <li class="nav-item">
                 <a href="{{ route('tags') }}" class="nav-link">
-                  
-                  
+
+
                   <i class=" nav-icon fa fa-hashtag" aria-hidden="true"></i>
                   <p>
                     Tags
-                    
+
                   </p>
                 </a>
-               
+
               </li> --}}
 
               {{-- <li class="nav-item">
                 <a href="{{ route('subscribers') }}" class="nav-link">
-                  
+
                   <i class=" nav-icon fa fa-at" aria-hidden="true"></i>
                   <p>
                     Subscribers
-                    
+
                   </p>
                 </a>
-               
+
               </li> --}}
               {{-- <li class="nav-header">Home Page</li>
               <li class="nav-item">
@@ -290,7 +290,7 @@
               <li class="nav-header">Training</li>
               {{-- <li class="nav-item">
                 <a href="{{ route('cohort') }}" class="nav-link">
-                 
+
                  <i class="fa fa-calendar nav-icon "></i>
                   <p>Cohort</p>
                 </a>
@@ -304,11 +304,11 @@
               </li>
 
 
-              
+
 
               <li class="nav-item ">
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit();"  class="nav-link">
-                  
+
                   <i class="nav-icon fas fa-door-open"></i>
                   <p class="text-danger" >
                     Logout
@@ -317,10 +317,10 @@
                     </form>
                   </p>
                 </a>
-                
-                
+
+
               </li>
-              
+
             </ul>
           </nav>
           <!-- /.sidebar-menu -->
@@ -334,28 +334,28 @@
               <li class="nav-item">
                 <a href="{{ route('root') }}" class="nav-link">
                   <i class="nav-icon fa fa-globe "></i>
-                  
+
                   <p>
                     Home Page
-                    
+
                   </p>
                 </a>
-                
+
               </li>
               <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Dashboard
-                    
+
                   </p>
                 </a>
-                
+
               </li>
 
               <li class="nav-item ">
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit();"  class="nav-link">
-                  
+
                   <i class="nav-icon fas fa-door-open"></i>
                   <p class="text-danger" >
                     Logout
@@ -364,10 +364,10 @@
                     </form>
                   </p>
                 </a>
-                
-                
+
+
               </li>
-              
+
             </ul>
           </nav>
 

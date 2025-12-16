@@ -24,13 +24,15 @@ class SaleLivewire extends Component
 {
     use LivewireAlert, WithPagination;
 
+    public $search = '';
+
     public $customers, $products;
     public $sale_id, $customer_id, $payment_method = 'cash', $total_amount = 0, $amount_paid = 0, $change = 0;
     public $sale_items = [];
     public $product_id, $quantity = 1;
 
     public $filter_date, $filter_customer, $filter_seller;
-    public $view_modal = false;
+    public $view_modal = false, $create_modal = false;
     public $selected_sale;
 
     public $return_item_id, $return_quantity, $admin_email, $admin_password, $return_reason;
@@ -204,6 +206,7 @@ class SaleLivewire extends Component
         $this->alert('success', 'Sale saved successfully.');
         $this->resetForm();
         $this->mount();
+        $this->create_modal = false;
     }
 
     /**
@@ -238,6 +241,7 @@ class SaleLivewire extends Component
             'record_id' => $id,
             'user_id' => auth()->id(),
         ]);
+        $this->create_modal = true;
     }
 
     /**
@@ -286,6 +290,12 @@ class SaleLivewire extends Component
             'record_id' => $id,
             'user_id' => auth()->id(),
         ]);
+    }
+
+    public function openCreateModal()
+    {
+        $this->resetForm();
+        $this->create_modal = true;
     }
 
     /**
@@ -416,7 +426,7 @@ class SaleLivewire extends Component
 
     public function cancel(){
         $this->reset([
-            'sale_id', 'customer_id', 'payment_method', 'total_amount', 'sale_items', 'product_id', 'quantity', 'amount_paid', 'change','return_item_id', 'return_quantity', 'admin_email', 'admin_password', 'return_reason','view_modal']);
+            'sale_id', 'customer_id', 'payment_method', 'total_amount', 'sale_items', 'product_id', 'quantity', 'amount_paid', 'change','return_item_id', 'return_quantity', 'admin_email', 'admin_password', 'return_reason','view_modal', 'create_modal']);
     }
 
 
@@ -427,23 +437,26 @@ class SaleLivewire extends Component
      */
     public function render()
     {
-        $query = Sale::with('customer', 'creator', 'items.product')->latest();
+        $query = Sale::with('customer', 'creator', 'items.product')
+            ->where(function ($query) {
+                $query->where('id', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('customer', function ($query) {
+                        $query->where('name', 'like', '%' . $this->search . '%');
+                    });
+            })
+            ->when($this->filter_date, function ($query) {
+                $query->whereDate('sale_date', $this->filter_date);
+            })
+            ->when($this->filter_customer, function ($query) {
+                $query->where('customer_id', $this->filter_customer);
+            })
+            ->when($this->filter_seller, function ($query) {
+                $query->where('created_by', $this->filter_seller);
+            });
 
-        if ($this->filter_date) {
-            $query->whereDate('sale_date', $this->filter_date);
-        }
+        $sales = $query->latest()->paginate(10);
 
-        if ($this->filter_customer) {
-            $query->where('customer_id', $this->filter_customer);
-        }
-
-        if ($this->filter_seller) {
-            $query->where('created_by', $this->filter_seller);
-        }
-
-        $sales = $query->paginate(10);
-
-        $daily_summary = Sale::whereDate('sale_date', today())->sum('total_amount');
+        $daily_summary = $query->sum('total_amount');
 
         return view('livewire.sales.sale-livewire', [
             'sales' => $sales,

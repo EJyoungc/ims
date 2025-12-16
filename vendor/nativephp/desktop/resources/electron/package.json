@@ -1,6 +1,6 @@
 {
     "name": "ims",
-    "version": "1.0.4",
+    "version": "1.0.7",
     "description": "Inventory Management System Dev By Techlink360",
     "main": "./out/main/index.js",
     "author": "Techlink360",

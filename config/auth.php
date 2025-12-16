@@ -2,6 +2,8 @@
 
 return [
 
+
+    'password_recovery' => env('PASSWORD_RECOVERY_METHOD', 'default'),
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults

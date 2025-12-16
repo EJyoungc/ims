@@ -67,17 +67,17 @@
                         <div class="card-header">
                             <h3 class="card-title">Products Stock List</h3>
                             <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 250px;">
+                                <div class="input-group input-group-sm d-flex" >
                                     <input type="text" wire:model.live.debounce.300ms="search"
-                                        class="form-control float-right"
+                                        class="form-control"
                                         placeholder="Search by name, brand, barcode...">
-                                    <div class="input-group-append">
-                                        <button type="button" class="btn btn-default" wire:click.prevent="printPage"><i
+                                    <div class=" btn-group">
+                                        <button type="button" class="btn btn-default btn-sm" wire:click.prevent="printPage"><i
                                                 class="fas fa-print"></i> Print</button>
-                                        <button type="button" class="btn btn-default" onclick="customPrint()"><i
+                                        <button type="button" class="btn btn-default btn-sm" onclick="customPrint()"><i
                                                 class="fas fa-print"></i> Print 2</button>
-                                        <div class="dropdown open">
-                                            <a class="btn btn-secondary dropdown-toggle" type="button" id="triggerId"
+
+                                            <a class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="triggerId"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Print 3
                                             </a>
@@ -90,15 +90,16 @@
 
 
 
-                                            </div>  
-                                        </div>
-                                    </div>
-                                    <x-modal title="pdf" status="{{ $modal }}" >
-                                        @if($modal)
-                                        <iframe src="{{ asset('pdf/My Awesome File.pdf') }}" type="application/pdf" width="100%" height="100%"  >
+                                            </div>
 
-                                        </iframe>
-                                        @endif 
+                                    </div>
+                                    <x-modal title="pdf" status="{{ $modal }}">
+                                        @if ($modal)
+                                            <iframe src="{{ asset('pdf/My Awesome File.pdf') }}" type="application/pdf"
+                                                width="100%" height="100%">
+
+                                            </iframe>
+                                        @endif
                                     </x-modal>
                                 </div>
                             </div>

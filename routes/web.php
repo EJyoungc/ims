@@ -1,7 +1,7 @@
 <?php
 
 
-
+use App\Http\Controllers\Auth\SecurityQuestionPasswordController;
 use App\Livewire\Access\AccessLivewire; // dev by Techlink360
 use App\Livewire\Products\ProductLivewire;
 use App\Livewire\Purchases\PurchaseLivewire;
@@ -16,6 +16,7 @@ use App\Livewire\Reports\ReportProfitLivewire;
 use App\Livewire\Reports\ReportStockLivewire;
 use App\Livewire\Categories\CategoriesLivewire;
 use App\Livewire\Dashboard\DashboardLivewire;
+use App\Livewire\Setup\DatabaseManagerLivewire;
 use App\Livewire\Setup\SetupLivewire;
 use App\Livewire\Setup\UserSetupLivewire;
 use App\Livewire\Users\LivewireUsers;
@@ -37,6 +38,14 @@ Route::get('/', function () {
 });
 
 Route::get('/setup', UserSetupLivewire::class)->name('setup');
+Route::get('/database/manager',DatabaseManagerLivewire::class)->name('database.manager');
+
+if (config('auth.password_recovery') === 'questions') {
+    Route::get('forgot-password-questions', [SecurityQuestionPasswordController::class, 'showForm'])->name('password.questions');
+    Route::post('verify-questions', [SecurityQuestionPasswordController::class, 'verify'])->name('password.questions.verify');
+    Route::get('reset-password-questions/{user}', [SecurityQuestionPasswordController::class, 'resetForm'])->name('password.questions.reset');
+    Route::post('reset-password-questions/{user}', [SecurityQuestionPasswordController::class, 'reset'])->name('password.questions.update');
+}
 
 Route::middleware([
     'auth:sanctum',
@@ -88,6 +97,15 @@ Route::middleware([
         Route::get('/sales', SaleLivewire::class)->name('sales');
         Route::get('/customers', CustomerLivewire::class)->name('customers');
         Route::get('/returns', ReturnLivewire::class)->name('returns');
+        Route::get('/categories', CategoriesLivewire::class)->name('categories');
+        Route::get('/products', ProductLivewire::class)->name('products');
+
+
+        Route::get('/products', ProductLivewire::class)->name('products');
+        Route::get('/suppliers', SupplierLivewire::class)->name('suppliers');
+        Route::get('/purchases', PurchaseLivewire::class)->name('purchases');
+
+
     });
 
     // Route::get('/dashboard', DashboardLivewire::class)->name('dashboard');

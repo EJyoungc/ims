@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.5] - 2025-12-11
+### Added
+- Added search functionality to the sales page.
+- Added a "Create New Sale" button and modal to the sales page.
+- Added a "Show/Hide Profit" button to the sales page to conditionally display the profit column.
+
+### Changed
+- The "Edit Sale" functionality is now a modal.
+- The daily sales summary now reflects the total of the filtered sales.
+
+### Fixed
+- Made the tables in the sales page responsive.
+
 ## [1.0.4] - 2025-12-09
 ### Fixed
 - Fixed a bug where updating a product's creation and update was fixed .
@@ -44,4 +57,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adjusted colspan for empty row in supplier list view.
 
 ### Security
-- 
+-

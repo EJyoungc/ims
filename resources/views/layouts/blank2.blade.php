@@ -20,47 +20,36 @@
 
     <!-- Scripts -->
     <link rel="stylesheet" href="{{ asset('dist/webfont/tabler-icons.min.css') }}">
-    @vite(['dist/webfont/tabler-icons.min.css','dist/css/style.css','plugins/fontawesome-free/css/all.min.css'])
+    @vite(['dist/webfont/tabler-icons.min.css', 'dist/css/style.css', 'plugins/fontawesome-free/css/all.min.css'])
 
 
     <!-- Styles -->
     @livewireStyles
 </head>
 
-<body class="hold-transition sidebar-mini">
-    <!-- Site wrapper -->
-    <div class="wrapper">
-        <!-- Navbar -->
-        @livewire('nav.livewire-top')
-        <!-- /.navbar -->
+<body class=" ">
 
-        <!-- Main Sidebar Container -->
-        @livewire('navigation-menu-left')
-        @livewire('access.recovery-question-livewire')
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            {{ $slot }}
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
 
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
+    @yield('content')
+
+
+
+    <footer class="navbar sticky-bottom bg-body border pt-3 ">
+        <div class="container d-flex justify-content-between py-3">
+            <div class="">
                 <b>Version</b> 1.0
             </div>
-            <strong>Copyright &copy; 2014-2025 <a href="http://techlink360.net" class="text-success" >Techlink 360</a>.</strong> All rights
-            reserved.
-        </footer>
+            <div class="">
+                <strong>Copyright &copy; 2014-2025 <a href="http://techlink360.net" class="text-success">Techlink
+                        360</a>.</strong> All rights
+                reserved.
+            </div>
+        </div>
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
-    </div>
-    <!-- ./wrapper -->
+
+    </footer>
+
 
 
 
@@ -93,7 +82,7 @@
     <!-- Bootstrap 4 -->
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
-    <script src="{{ asset('dist/js/adminlte.min.js')}}"></script>
+    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     {{-- <script src="{{ asset('dist/js/demo.js')}}"></script> --}}
     <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>

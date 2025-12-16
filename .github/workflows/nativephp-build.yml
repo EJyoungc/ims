@@ -20,8 +20,6 @@ jobs:
           php-version: '8.3'
           extensions: mbstring, intl, fileinfo, openssl, pdo, pdo_mysql, zip, gd, pdo_sqlite, sqlite3, curl, sockets, json, date, xml, tokenizer, session, mbstring, iconv, simplexml, dom, xmlreader, xmlwriter, simplexml,
 
-
-
       - name: Install Composer Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
@@ -33,13 +31,9 @@ jobs:
 
       - name: Install Install NativePHP
         run: |
-
-
           php artisan native:install
           npm audit fix
           npm i
-
-
 
       - name: create database
         run: php artisan migrate --force

@@ -15,16 +15,28 @@ class NativeAppServiceProvider implements ProvidesPhpIni
     public function boot(): void
     {
 
+        
+
         Menu::create(
             Menu::make(
-                Menu::route('setup','Setup'),
-                Menu::route('login','Login'),
-                Menu::route('dashboard','Dashboard'),
+                Menu::route('setup', 'Setup'),
+                // Menu::route('database.manager', 'Datatbase Manager'),
+                Menu::route('login', 'Login'),
+                Menu::route('dashboard', 'Dashboard'),
             )->label('Navigation'),
             Menu::view()
         );
-         
-        Window::open();
+
+        $window = Window::open();
+        // $window->icon('')
+        $window->webPreferences([
+            // 'javascript'=> false,
+            'spellcheck' => true,
+            'backgroundThrottling' => true,
+        ]);
+        $window->minWidth(400);
+        $window->minHeight(400);
+        $window->maximized();
     }
 
     /**
@@ -32,7 +44,6 @@ class NativeAppServiceProvider implements ProvidesPhpIni
      */
     public function phpIni(): array
     {
-        return [
-        ];
+        return [];
     }
 }
