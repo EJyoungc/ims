@@ -1,10 +1,10 @@
 {
-    "name": "ims",
-    "version": "1.0.7",
-    "description": "Inventory Management System Dev By Techlink360",
+    "name": "nativephp",
+    "version": "v2",
+    "description": "A NativePHP Electron application",
     "main": "./out/main/index.js",
-    "author": "Techlink360",
-    "homepage": "https://techlink360.net",
+    "author": "NativePHP",
+    "homepage": "https://nativephp.com",
     "type": "module",
     "engines": {
         "node": ">=22.0.0"

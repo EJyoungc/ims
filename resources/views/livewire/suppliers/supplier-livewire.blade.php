@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div>
-                            <button wire:click="create" class="btn btn-primary">Add Supplier</button>
+                            <button wire:click="create" class="btn btn-primary">Add Supplier <x-spinner for="create" /></button>
                         </div>
                     </div>
 
@@ -62,7 +62,7 @@
                                 @error('address') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary">Save <x-spinner for="store" /></button>
                             </div>
                         </form>
                     </x-modal>
@@ -104,12 +104,12 @@
                                                 </td>
                                                 <td>
                                                     @if($supplier->trashed())
-                                                        <button wire:click="restore({{ $supplier->id }})" class="btn btn-sm btn-outline-success">Restore</button>
+                                                        <button wire:click="restore({{ $supplier->id }})" class="btn btn-sm btn-outline-success">Restore <x-spinner for="restore({{ $supplier->id }})" /></button>
                                                     @else
-                                                        <button wire:click="edit({{ $supplier->id }})" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                                        <button wire:click="delete({{ $supplier->id }})" class="btn btn-sm btn-outline-danger">Delete</button>
+                                                        <button wire:click="edit({{ $supplier->id }})" class="btn btn-sm btn-outline-secondary">Edit <x-spinner for="edit({{ $supplier->id }})" /></button>
+                                                        <button wire:click="delete({{ $supplier->id }})" class="btn btn-sm btn-outline-danger">Delete <x-spinner for="delete({{ $supplier->id }})" /></button>
                                                         <button wire:click="toggleBlacklist({{ $supplier->id }})" class="btn btn-sm btn-outline-warning">
-                                                            {{ $supplier->is_blacklisted ? 'Unlist' : 'Blacklist' }}
+                                                            {{ $supplier->is_blacklisted ? 'Unlist' : 'Blacklist' }} <x-spinner for="toggleBlacklist({{ $supplier->id }})" />
                                                         </button>
                                                     @endif
                                                 </td>

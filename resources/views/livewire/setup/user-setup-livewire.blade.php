@@ -47,7 +47,7 @@
                             <p class="text-danger mt-2">Run migrations to create required tables.</p>
 
                             <button wire:click="runMigrations" class="btn btn-primary">
-                                Run All Migrations
+                                Run All Migrations <x-spinner for="runMigrations" />
                             </button>
                         @endif
 
@@ -69,7 +69,7 @@
                             <p class="text-danger mt-2">You must create an owner account.</p>
 
                             <a href="#" wire:click.prevent='open' class="btn btn-primary btn-sm mt-2">
-                                Create Owner Account
+                                Create Owner Account <x-spinner for="open" />
                             </a>
                         @endif
 
@@ -122,7 +122,7 @@
             <!-- Re-check Button -->
             <div class="text-center mt-4">
                 <button wire:click="runChecks" class="btn btn-secondary">
-                    <i class="fas fa-sync-alt"></i> Re-run Setup Check
+                    <i class="fas fa-sync-alt"></i> Re-run Setup Check <x-spinner for="runChecks" />
                 </button>
                 <a href="{{ route('login') }}" class="btn btn-success">Skip to Login <i class="fas fa-sign-in-alt"></i>
                 </a>

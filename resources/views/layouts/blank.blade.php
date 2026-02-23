@@ -38,12 +38,10 @@
     <footer class="navbar sticky-bottom bg-body border pt-3 ">
         <div class="container d-flex justify-content-between py-3">
             <div class="">
-                <b>Version</b> 1.0
+                <b>Version</b>  {{ config('nativephp.version') }}
             </div>
             <div class="">
-                <strong>Copyright &copy; 2014-2025 <a href="http://techlink360.net" class="text-success">Techlink
-                        360</a>.</strong> All rights
-                reserved.
+               <strong>© {{ date('Y') }} Built by <a href="http://techlink360.net" class="text-muted">Techlink360</a></strong> ·  
             </div>
         </div>
 

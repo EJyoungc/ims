@@ -26,7 +26,7 @@
                             <h3 class="card-title">Return History</h3>
                             <div class="card-tools">
                                 <button wire:click="openNewReturnModal" class="btn btn-primary">Record New
-                                    Return</button>
+                                    Return <x-spinner for="openNewReturnModal" /></button>
                             </div>
                         </div>
                         <div class="card-body">
@@ -88,14 +88,14 @@
                                                 <td>{{ $return->approver->name ?? 'N/A' }}</td>
                                                 <td>
                                                     <button wire:click="viewReturn({{ $return->id }})"
-                                                        class="btn btn-info btn-sm" title="View"><i
+                                                        class="btn btn-info btn-sm" title="View"><x-spinner for="viewReturn({{ $return->id }})" /><i
                                                             class="fas fa-eye"></i></button>
                                                     @if ($return->status == 'pending')
                                                         <button wire:click="approveReturn({{ $return->id }})"
-                                                            class="btn btn-success btn-sm" title="Approve"><i
+                                                            class="btn btn-success btn-sm" title="Approve"><x-spinner for="approveReturn({{ $return->id }})" /><i
                                                                 class="fas fa-check"></i></button>
                                                         <button wire:click="rejectReturn({{ $return->id }})"
-                                                            class="btn btn-danger btn-sm" title="Reject"><i
+                                                            class="btn btn-danger btn-sm" title="Reject"><x-spinner for="rejectReturn({{ $return->id }})" /><i
                                                                 class="fas fa-times"></i></button>
                                                     @endif
                                                     {{-- Add view details button later if needed --}}
@@ -134,7 +134,7 @@
                 <p><strong>Created By:</strong> {{ $selected_return->creator->name ?? 'N/A' }}</p>
                 <p><strong>Approved By:</strong> {{ $selected_return->approver->name ?? 'N/A' }}</p>
 
-                <button wire:click="printReturn({{ $selected_return->id }})" class="btn btn-primary">Print</button>
+                <button wire:click="printReturn({{ $selected_return->id }})" class="btn btn-primary">Print <x-spinner for="printReturn({{ $selected_return->id }})" /></button>
                 <h5 class="mt-4">Returned Items</h5>
                 <table class="table table-bordered">
                     <thead>
@@ -228,7 +228,7 @@
                     </div>
                 @endif
 
-                <button type="submit" class="btn btn-primary">Submit Return</button>
+                <button type="submit" class="btn btn-primary">Submit Return <x-spinner for="storeReturn" /></button>
             </form>
         </x-modal>
 

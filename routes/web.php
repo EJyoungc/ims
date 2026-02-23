@@ -20,7 +20,10 @@ use App\Livewire\Setup\DatabaseManagerLivewire;
 use App\Livewire\Setup\SetupLivewire;
 use App\Livewire\Setup\UserSetupLivewire;
 use App\Livewire\Users\LivewireUsers;
+use App\Livewire\Licenses\LicenseManagerLivewire;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckLicense;
+use App\Livewire\TrialBlocked;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +38,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect(route('login'));
-});
-
+})->name('home');
+// Route::get('/license.expired', function () {
+//     return "expired";
+// })->name('license.expired');
+Route::get('/license-manager', LicenseManagerLivewire::class)->name('license.manager')->middleware(CheckLicense::class);
+Route::get('/trial-blocked', TrialBlocked::class)->name('trial.blocked');
+Route::get('/about', \App\Livewire\AboutLivewire::class)->name('about');
 Route::get('/setup', UserSetupLivewire::class)->name('setup');
 Route::get('/database/manager',DatabaseManagerLivewire::class)->name('database.manager');
 
@@ -51,6 +59,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    'license',
 ])->group(function () {
 
      // ==============================
@@ -62,6 +71,7 @@ Route::middleware([
         ->name('returns.print');
     Route::get('/profile', \App\Livewire\Profile\ProfileLivewire::class)->name('profile');
     Route::get('/unauthorized', AccessLivewire::class)->name('unauthorized'); // dev by Techlink360
+    
 
     // ==============================
     // SYSTEM ADMIN ONLY

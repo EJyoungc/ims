@@ -128,7 +128,7 @@
 
                 <div class="text-right mt-4">
                     <button type="submit" class="btn btn-success btn-lg">
-                        <i class="fas fa-save"></i> Save Settings
+                        <i class="fas fa-save"></i> Save Settings <x-spinner for="saveSettings" />
                     </button>
                 </div>
 

@@ -33,6 +33,7 @@
                                     <ul class="list-group position-absolute w-100" style="z-index: 1000;">
                                         @foreach ($searchResults as $product)
                                             <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"  wire:click="addItemToCart({{ $product->id }})">
+                                                <x-spinner for="addItemToCart({{ $product->id }})" />
                                                 <div>{{ $product->name }}  </div> <span class="badge badge-primary badge-pill" >MWK{{ number_format($product->selling_price, 2) }}</span>  <span class="badge badge-{{ $product->quantity > 0 ? 'success' : 'danger' }} badge-pill" >{{ $product->quantity }}</span>
                                             </li>
                                         @endforeach
@@ -61,18 +62,18 @@
                                                 <td>
                                                     <div class="input-group input-group-sm" style="width: 120px;">
                                                         <div class="input-group-prepend">
-                                                            <button class="btn btn-outline-secondary" type="button" wire:click="decrementQuantity({{ $index }})">-</button>
+                                                            <button class="btn btn-outline-secondary" type="button" wire:click="decrementQuantity({{ $index }})"><x-spinner for="decrementQuantity({{ $index }})" />-</button>
                                                         </div>
                                                         <input type="text" class="form-control text-center" value="{{ $item['quantity'] }}" readonly>
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-outline-secondary" type="button" wire:click="incrementQuantity({{ $index }})">+</button>
+                                                            <button class="btn btn-outline-secondary" type="button" wire:click="incrementQuantity({{ $index }})"><x-spinner for="incrementQuantity({{ $index }})" />+</button>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>MWK{{ number_format($item['price'] * $item['quantity'], 2) }}</td>
                                                 <td>
                                                     <button class="btn btn-danger btn-sm" wire:click="removeItemFromCart({{ $index }})">
-                                                        <i class="fas fa-trash"></i>
+                                                        <x-spinner for="removeItemFromCart({{ $index }})" /><i class="fas fa-trash"></i>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -111,7 +112,7 @@
                                         @endforeach
                                     </select>
                                     <div class="input-group-append">
-                                        <button wire:click="openCustomerModal" @click="$wire.dispatch('customer-modal-open')" class="btn btn-primary">Add</button>
+                                        <button wire:click="openCustomerModal" @click="$wire.dispatch('customer-modal-open')" class="btn btn-primary"><x-spinner for="openCustomerModal" />Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -138,10 +139,10 @@
                             </div>
 
                             <button class="btn btn-success btn-lg btn-block mt-3" wire:click="pay" wire:loading.attr="disabled" @if($amount_paid < $totalPrice) disabled @endif>
-                                <i class="fas fa-money-bill-wave"></i> Pay
+                                <x-spinner for="pay" /><i class="fas fa-money-bill-wave"></i> Pay
                             </button>
                             <button class="btn btn-secondary btn-block mt-2" wire:click="clearSale" wire:loading.attr="disabled">
-                                <i class="fas fa-redo"></i> Clear Sale
+                                <x-spinner for="clearSale" /><i class="fas fa-redo"></i> Clear Sale
                             </button>
 
                             <!-- Receipt Display -->
@@ -166,7 +167,7 @@
                                         <i class="fas fa-print"></i> Print Receipt
                                     </button>
                                     <button class="btn btn-primary btn-block mt-2" wire:click="$set('receipt', null)">
-                                        <i class="fas fa-plus"></i> New Sale
+                                        <x-spinner for="$set('receipt', null)" /><i class="fas fa-plus"></i> New Sale
                                     </button>
                                 </div>
                             @endif
@@ -211,8 +212,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="closeCustomerModal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Save Customer</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="closeCustomerModal"><x-spinner for="closeCustomerModal" />Cancel</button>
+                        <button type="submit" class="btn btn-primary"><x-spinner for="saveCustomer" />Save Customer</button>
                     </div>
                 </form>
             </div>

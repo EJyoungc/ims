@@ -93,7 +93,7 @@
                                         <div class="form-group">
                                             <label>&nbsp;</label>
                                             <button type="button" wire:click="addItem"
-                                                class="btn btn-primary btn-block">Add Item</button>
+                                                class="btn btn-primary btn-block">Add Item <x-spinner for="addItem" /></button>
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                                                     <td>
                                                         <button type="button"
                                                             wire:click="removeItem({{ $index }})"
-                                                            class="btn btn-danger btn-sm">Remove</button>
+                                                            class="btn btn-danger btn-sm">Remove <x-spinner for="removeItem({{ $index }})" /></button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -143,7 +143,7 @@
                                 </div>
 
                                 <div class="form-group mt-3">
-                                    <button type="submit" class="btn btn-success">Save Purchase</button>
+                                    <button type="submit" class="btn btn-success">Save Purchase <x-spinner for="store" /></button>
                                 </div>
                             </form>
                         </div>
@@ -197,9 +197,9 @@
                                             </td>
                                             <td>
                                                 <button wire:click="viewPurchase({{ $purchase->id }})"
-                                                    class="btn btn-sm btn-info">View Details</button>
+                                                    class="btn btn-sm btn-info">View Details <x-spinner for="viewPurchase({{ $purchase->id }})" /></button>
                                                 <button wire:click="delete({{ $purchase->id }})"
-                                                    class="btn btn-sm btn-danger">Delete</button>
+                                                    class="btn btn-sm btn-danger">Delete <x-spinner for="delete({{ $purchase->id }})" /></button>
                                             </td>
                                         </tr>
                                     @empty

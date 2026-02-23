@@ -5,6 +5,9 @@ use Illuminate\Support\ServiceProvider;
 
 return [
 
+
+    'trial_restore_key' => env('TRIAL_RESTORE_KEY'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -199,7 +202,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
-        
+
     ])->toArray(),
 
 ];

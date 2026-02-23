@@ -82,12 +82,12 @@
                                                 <td>
                                                     @if($category->trashed())
                                                         <button wire:click.prevent="restore({{ $category->id }})"
-                                                            class="btn btn-sm btn-outline-success">Restore</button>
+                                                            class="btn btn-sm btn-outline-success"><x-spinner for="restore({{ $category->id }})" />Restore</button>
                                                     @else
                                                         <button wire:click.prevent="edit({{ $category->id }})"
-                                                            class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                            class="btn btn-sm btn-outline-secondary"><x-spinner for="edit({{ $category->id }})" />Edit</button>
                                                         <button wire:click.prevent="delete({{ $category->id }})"
-                                                            class="btn btn-sm btn-outline-danger">Delete</button>
+                                                            class="btn btn-sm btn-outline-danger"><x-spinner for="delete({{ $category->id }})" />Delete</button>
                                                     @endif
                                                 </td>
                                             </tr>

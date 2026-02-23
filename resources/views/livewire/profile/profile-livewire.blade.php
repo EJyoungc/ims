@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <button type="submit" class="btn btn-primary">Save Changes <x-spinner for="updateProfile" /></button>
                             </div>
                         </form>
                     </div>
@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Change Password</button>
+                                <button type="submit" class="btn btn-primary">Change Password <x-spinner for="updatePassword" /></button>
                             </div>
                         </form>
                     </div>

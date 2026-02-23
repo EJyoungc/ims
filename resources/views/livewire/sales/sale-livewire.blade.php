@@ -28,7 +28,7 @@
                                     <h3 class="card-title">Sales History</h3>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <button wire:click="openCreateModal" class="btn btn-primary">Create New Sale</button>
+                                    <button wire:click="openCreateModal" class="btn btn-primary">Create New Sale <x-spinner for="openCreateModal" /></button>
                                 </div>
                             </div>
                         </div>
@@ -98,15 +98,15 @@
                                                 <td>
                                                     <div class="btn-group">
                                                         <button wire:click="viewSale({{ $sale->id }})"
-                                                            class="btn btn-sm btn-info">View</button>
+                                                            class="btn btn-sm btn-info">View <x-spinner for="viewSale({{ $sale->id }})" /></button>
                                                         <button wire:click="editSale({{ $sale->id }})"
-                                                            class="btn btn-sm btn-secondary">Edit</button>
+                                                            class="btn btn-sm btn-secondary">Edit <x-spinner for="editSale({{ $sale->id }})" /></button>
                                                         @if (Auth::user()->is_admin)
                                                             <button wire:click="deleteSale({{ $sale->id }})"
-                                                                class="btn btn-sm btn-danger">Delete</button>
+                                                                class="btn btn-sm btn-danger">Delete <x-spinner for="deleteSale({{ $sale->id }})" /></button>
                                                         @endif
                                                         <button wire:click="printReceipt({{ $sale->id }})"
-                                                            class="btn btn-sm btn-primary">Print</button>
+                                                            class="btn btn-sm btn-primary">Print <x-spinner for="printReceipt({{ $sale->id }})" /></button>
                                                     </div>
 
                                                 </td>
@@ -186,7 +186,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>&nbsp;</label>
-                            <button type="button" wire:click="addItem" class="btn btn-primary btn-block">Add Item</button>
+                            <button type="button" wire:click="addItem" class="btn btn-primary btn-block">Add Item <x-spinner for="addItem" /></button>
                         </div>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
                                         <td>{{ number_format($item['total_price'], 2) }}</td>
                                         <td>{{ number_format(($item['unit_price'] - $item['purchase_price']) * $item['quantity'], 2) }}</td>
                                         <td>
-                                            <button type="button" wire:click="removeItem({{ $index }})" class="btn btn-danger btn-sm">Remove</button>
+                                            <button type="button" wire:click="removeItem({{ $index }})" class="btn btn-danger btn-sm">Remove <x-spinner for="removeItem({{ $index }})" /></button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -246,8 +246,8 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <button type="submit" class="btn btn-success">{{ $sale_id ? 'Update Sale' : 'Complete Sale' }}</button>
-                    <button type="button" wire:click="cancel" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-success">{{ $sale_id ? 'Update Sale' : 'Complete Sale' }} <x-spinner for="store" /></button>
+                    <button type="button" wire:click="cancel" class="btn btn-secondary">Cancel <x-spinner for="cancel" /></button>
                 </div>
             </form>
         </x-modal>
@@ -293,7 +293,7 @@
                                 </td>
                                 <td>
                                     <button wire:click="returnItem({{ $item->id }})"
-                                        class="btn btn-sm btn-warning">Return</button>
+                                        class="btn btn-sm btn-warning">Return <x-spinner for="returnItem({{ $item->id }})" /></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -335,7 +335,7 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    <button wire:click="confirmReturn" class="btn btn-success">Confirm Return</button>
+                    <button wire:click="confirmReturn" class="btn btn-success">Confirm Return <x-spinner for="confirmReturn" /></button>
                 </div>
             @endif
         </x-modal>

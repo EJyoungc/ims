@@ -18,16 +18,27 @@ class NativeAppServiceProvider implements ProvidesPhpIni
         
 
         Menu::create(
+            Menu::view(),
             Menu::make(
-                Menu::route('setup', 'Setup'),
+               
                 // Menu::route('database.manager', 'Datatbase Manager'),
                 Menu::route('login', 'Login'),
                 Menu::route('dashboard', 'Dashboard'),
             )->label('Navigation'),
-            Menu::view()
+            Menu::make(
+                Menu::route('setup', 'Setup'),
+                Menu::route('license.manager','License Manager'),
+                Menu::route('about', 'About'),
+                
+            )->label('Help')
+
+            
         );
 
         $window = Window::open();
+        
+
+
         // $window->icon('')
         $window->webPreferences([
             // 'javascript'=> false,
@@ -37,6 +48,8 @@ class NativeAppServiceProvider implements ProvidesPhpIni
         $window->minWidth(400);
         $window->minHeight(400);
         $window->maximized();
+        
+        
     }
 
     /**

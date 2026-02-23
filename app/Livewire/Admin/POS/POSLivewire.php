@@ -10,6 +10,7 @@ use App\Models\SaleItem; // dev by Techlink360: Import the SaleItem model
 use Illuminate\Support\Facades\Auth; // dev by Techlink360: Import Auth facade
 use Illuminate\Support\Facades\Cache;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Native\Desktop\Facades\System;
 use Livewire\Component;
 
 class POSLivewire extends Component
@@ -43,8 +44,8 @@ class POSLivewire extends Component
             $cacheKey = 'pos_search_' . md5($value);
             $this->searchResults = Cache::remember($cacheKey, now()->addMinutes(5), function () use ($value) {
                 return Product::where('name', 'like', '%' . $value . '%')
-                              ->orWhere('barcode', 'like', '%' . $value . '%')
-                              ->get();
+                    ->orWhere('barcode', 'like', '%' . $value . '%')
+                    ->get();
             });
         } else {
             $this->searchResults = [];
@@ -229,11 +230,47 @@ class POSLivewire extends Component
                 'user_id' => auth()->id(),
             ]);
 
+            $html = '<html>
+<body>
+    <div class="mt-4 p-3 border rounded bg-light">
+        <h5>Receipt</h5>
+
+        <p><strong>Transaction ID:</strong> ' . $this->receipt['transaction_id'] . '</p>
+        <p><strong>Date:</strong> ' . $this->receipt['date'] . '</p>
+        <p><strong>Payment Method:</strong> ' . ucfirst($this->receipt['payment_method']) . '</p>
+
+        <hr>
+
+        <h6>Items:</h6>
+        <ul>';
+
+            foreach ($this->receipt['items'] as $item) {
+                $lineTotal = $item['price'] * $item['quantity'];
+
+                $html .= '<li>'
+                    . htmlspecialchars($item['name']) . ' ('
+                    . (int)$item['quantity'] . ' x MWK'
+                    . number_format($item['price'], 2) . ') = MWK'
+                    . number_format($lineTotal, 2)
+                    . '</li>';
+            }
+
+            $html .= '</ul>
+        <hr>
+
+        <h5 class="text-right">Total: MWK' . number_format($this->receipt['total'], 2) . '</h5>
+        <h5 class="text-right">Amount Paid: MWK' . number_format($this->receipt['amount_paid'], 2) . '</h5>
+        <h5 class="text-right">Change: MWK' . number_format($this->receipt['change'], 2) . '</h5>
+    </div>
+</body>
+</html>';
+
+            System::print($html);
+
             $this->alert('success', 'Sale completed successfully!');
             $this->clearSale(); // Clear cart after sale
             // dev by Techlink360: Dispatch event to show receipt or print
             $this->dispatch('show-receipt');
-
         } catch (\Exception $e) {
             // dev by Techlink360: Log the error and show an alert
             \Log::error('POS Sale Error: ' . $e->getMessage());

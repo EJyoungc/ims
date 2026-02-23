@@ -26,8 +26,9 @@
                             <input type="text" wire:model.live="search" class="form-control" placeholder="Search customers...">
                         </div>
                         <div class="form-group">
+                            <x-spinner for="create" />
                             <button wire:click="create()" @click="$wire.dispatch('modal-open');" class="btn-primary btn-sm">
-                                Add <x-spinner for="create" />
+                                Add
                             </button>
                         </div>
                     </div>
@@ -55,8 +56,8 @@
                                                 <td>{{ $customer->address }}</td>
                                                 <td>{{ $customer->sales_count }}</td>
                                                 <td>
-                                                    <button wire:click="create({{ $customer->id }})" @click="$wire.dispatch('modal-open');" class="btn btn-sm btn-primary">Edit</button>
-                                                    <button wire:click="delete({{ $customer->id }})" class="btn btn-sm btn-danger">Delete</button>
+                                                    <button wire:click="create({{ $customer->id }})" @click="$wire.dispatch('modal-open');" class="btn btn-sm btn-primary"><x-spinner for="create({{ $customer->id }})" />Edit</button>
+                                                    <button wire:click="delete({{ $customer->id }})" class="btn btn-sm btn-danger"><x-spinner for="delete({{ $customer->id }})" />Delete</button>
                                                 </td>
                                             </tr>
                                         @empty

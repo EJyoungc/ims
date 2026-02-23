@@ -46,18 +46,17 @@
                     with</p>
                   <span class="border-top w-100 position-absolute top-50 start-50 translate-middle"></span>
                 </div> --}}
-                                <form method="POST" action="{{ route('login') }}">
+                                <form method="POST" id="loginForm" action="{{ route('login') }}">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Username</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                                        <input type="email" class="form-control" name="email"
                                             aria-describedby="emailHelp">
                                         <x-error for="email" />
                                     </div>
                                     <div class="mb-4">
                                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                                        <input type="password" class="form-control" name="password"
-                                            id="exampleInputPassword1">
+                                        <input type="password" class="form-control" name="password">
                                         <x-error for="password" />
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-4">
@@ -70,19 +69,49 @@
                                         </div>
 
                                         @if (config('auth.password_recovery') === 'questions')
-                                            <a class="text-primary fw-medium"  href="{{ route('password.questions') }}">Forgot your password?</a>
+                                            <a class="text-primary fw-medium"
+                                                href="{{ route('password.questions') }}">Forgot your password?</a>
                                         @else
-                                            <a class="text-primary fw-medium" href="{{ route('password.request') }}">Forgot your password?</a>
+                                            <a class="text-primary fw-medium" href="{{ route('password.request') }}">Forgot
+                                                your password?</a>
                                         @endif
-                                        
+
                                     </div>
-                                    <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign
-                                        In</button>
+                                    <button type="submit" onclick="clickit()" id="loginBtn"
+                                        class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign
+                                        In <span id="loginSpinner" class="spinner-border spinner-border-sm d-none"
+                                            role="status"></span>
+                                    </button>
                                     <div class="d-flex align-items-center justify-content-center">
                                         {{-- <p class="fs-4 mb-0 fw-medium">New to Modernize?</p> --}}
                                         {{-- <a class="text-primary fw-medium ms-2" href="authentication-register.html">Create an account</a> --}}
                                     </div>
                                 </form>
+
+                                <script>
+                                    function clickit() {
+
+
+                                        const form = document.getElementById('loginForm')
+                                        const btn = document.getElementById('loginBtn');
+                                        const spinner = document.getElementById('loginSpinner');
+                                        const text = document.getElementById('loginText');
+                                        form.submit();
+                                        // UI: show spinner
+                                        btn.disabled = true;
+                                        spinner.classList.remove('d-none');
+
+                                        // alert('test');
+
+                                        // Submit normally after UI update
+                                        // setTimeout(() => {
+                                        //     form.submit();
+                                        // }, 100);
+
+                                        //  form.submit();
+                                    }
+                                </script>
+
                             </div>
                         </div>
                     </div>

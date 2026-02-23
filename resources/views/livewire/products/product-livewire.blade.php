@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div>
-                            <button wire:click="create" class="btn btn-primary">Add Product</button>
+                            <button wire:click="create" class="btn btn-primary">Add Product <x-spinner for="create" /></button>
                         </div>
                     </div>
 
@@ -119,7 +119,7 @@
                                 @error('description') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary">Save <x-spinner for="store" /></button>
                             </div>
                         </form>
                     </x-modal>
@@ -173,10 +173,10 @@
                                                 </td>
                                                 <td>
                                                     @if($product->trashed())
-                                                        <button wire:click="restore({{ $product->id }})" class="btn btn-sm btn-outline-success">Restore</button>
+                                                        <button wire:click="restore({{ $product->id }})" class="btn btn-sm btn-outline-success">Restore <x-spinner for="restore({{ $product->id }})" /></button>
                                                     @else
-                                                        <button wire:click="edit({{ $product->id }})" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                                        <button wire:click="delete({{ $product->id }})" class="btn btn-sm btn-outline-danger">Delete</button>
+                                                        <button wire:click="edit({{ $product->id }})" class="btn btn-sm btn-outline-secondary">Edit <x-spinner for="edit({{ $product->id }})" /></button>
+                                                        <button wire:click="delete({{ $product->id }})" class="btn btn-sm btn-outline-danger">Delete <x-spinner for="delete({{ $product->id }})" /></button>
                                                     @endif
                                                 </td>
                                             </tr>

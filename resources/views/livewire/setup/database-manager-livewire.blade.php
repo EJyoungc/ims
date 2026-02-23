@@ -50,13 +50,13 @@
                                         <button wire:click="recoverDatabase('{{ $backup['path'] }}')"
                                             class="btn btn-sm btn-primary"
                                             onclick="return confirm('Restore this backup? This will overwrite the current database.')">
-                                            Restore
+                                            Restore <x-spinner for="recoverDatabase('{{ $backup['path'] }}')" />
                                         </button>
 
                                         <button wire:click="deleteBackup('{{ $backup['path'] }}')"
                                             class="btn btn-sm btn-danger"
                                             onclick="return confirm('Delete this backup?')">
-                                            Delete
+                                            Delete <x-spinner for="deleteBackup('{{ $backup['path'] }}')" />
                                         </button>
                                     </td>
                                 </tr>

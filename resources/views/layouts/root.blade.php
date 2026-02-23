@@ -20,14 +20,28 @@
 
     <!-- Scripts -->
     <link rel="stylesheet" href="{{ asset('dist/webfont/tabler-icons.min.css') }}">
-    @vite(['dist/webfont/tabler-icons.min.css','dist/css/style.css','plugins/fontawesome-free/css/all.min.css'])
-
+    @vite(['dist/webfont/tabler-icons.min.css', 'dist/css/style.css', 'plugins/fontawesome-free/css/all.min.css'])
 
     <!-- Styles -->
     @livewireStyles
 </head>
 
 <body class="hold-transition sidebar-mini">
+     <style>
+        #livewire-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            /* visible height */
+            background-color: #0d6efd;
+            /* bootstrap primary color */
+            z-index: 9999;
+            transition: width 0.2s ease;
+        }
+    </style>
+
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
@@ -48,10 +62,9 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                <b>Version</b> 1.0
+                <b>Version</b> {{ config('nativephp.version') }}
             </div>
-            <strong>Copyright &copy; 2014-2025 <a href="http://techlink360.net" class="text-success" >Techlink 360</a>.</strong> All rights
-            reserved.
+             <strong>© {{ date('Y') }} Built by <a href="http://techlink360.net" class="text-muted">Techlink360</a></strong> · 
         </footer>
 
         <!-- Control Sidebar -->
@@ -88,12 +101,29 @@
         // });
     </script>
 
+
+    <script>
+        document.addEventListener("livewire:init", () => {
+            Livewire.hook('request', ({
+                fail
+            }) => {
+                fail(({
+                    status
+                }) => {
+                    if (status === 401 || status === 419) {
+                        window.location.href = "{{ route('login') }}";
+                    }
+                });
+            });
+        });
+    </script>
+
     <!-- jQuery -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
-    <script src="{{ asset('dist/js/adminlte.min.js')}}"></script>
+    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     {{-- <script src="{{ asset('dist/js/demo.js')}}"></script> --}}
     <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>

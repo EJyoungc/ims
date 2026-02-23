@@ -22,10 +22,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            // UserSeeder::class,
             // RoleTableSeeder::class,
             UserTableSeeder::class,
-            // CategorySeeder::class, // dev by Techlink360: Call the CategorySeeder
-            // ProductSeeder::class,
+            CategorySeeder::class, // dev by Techlink360: Call the CategorySeeder
+            ProductSeeder::class,
 
         ]);
     }

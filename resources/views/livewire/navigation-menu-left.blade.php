@@ -28,7 +28,7 @@
                    with font-awesome or any other icon font library -->
 
                 <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="nav-link {{ Route::is('dashboard') ? 'active' : '' }} ">
+                    <a wire:navigate.hover href="{{ route('dashboard') }}" class="nav-link {{ Route::is('dashboard') ? 'active' : '' }} ">
                         <i class="nav-icon ti ti-dashboard"></i>
                         <p>Dashboard</p>
                     </a>
@@ -44,13 +44,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('products') }}" class="nav-link {{ Route::is('products') ? 'active' : '' }}">
+                            <a wire:navigate.hover href="{{ route('products') }}" class="nav-link {{ Route::is('products') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Products</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('categories') }}" class="nav-link {{ Route::is('categories') ? 'active' : '' }} ">
+                            <a wire:navigate.hover href="{{ route('categories') }}" class="nav-link {{ Route::is('categories') ? 'active' : '' }} ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Categories</p>
                             </a>

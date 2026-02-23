@@ -72,7 +72,7 @@
                                         class="form-control"
                                         placeholder="Search by name, brand, barcode...">
                                     <div class=" btn-group">
-                                        <button type="button" class="btn btn-default btn-sm" wire:click.prevent="printPage"><i
+                                        <button type="button" class="btn btn-default btn-sm" wire:click.prevent="printPage"><x-spinner for="printPage" /><i
                                                 class="fas fa-print"></i> Print</button>
                                         <button type="button" class="btn btn-default btn-sm" onclick="customPrint()"><i
                                                 class="fas fa-print"></i> Print 2</button>
@@ -117,15 +117,15 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th wire:click="sortBy('name')" style="cursor: pointer;">Name <i
+                                            <th wire:click="sortBy('name')" style="cursor: pointer;">Name <x-spinner for="sortBy('name')" /><i
                                                     class="fas fa-sort"></i></th>
-                                            <th wire:click="sortBy('category_id')" style="cursor: pointer;">Category <i
+                                            <th wire:click="sortBy('category_id')" style="cursor: pointer;">Category <x-spinner for="sortBy('category_id')" /><i
                                                     class="fas fa-sort"></i></th>
-                                            <th wire:click="sortBy('brand')" style="cursor: pointer;">Brand <i
+                                            <th wire:click="sortBy('brand')" style="cursor: pointer;">Brand <x-spinner for="sortBy('brand')" /><i
                                                     class="fas fa-sort"></i></th>
                                             <th>Purchase Price</th>
                                             <th>Selling Price</th>
-                                            <th wire:click="sortBy('quantity')" style="cursor: pointer;">Quantity <i
+                                            <th wire:click="sortBy('quantity')" style="cursor: pointer;">Quantity <x-spinner for="sortBy('quantity')" /><i
                                                     class="fas fa-sort"></i></th>
                                             <th>Re-order Level</th>
                                             <th>Stock Value (Purchase)</th>

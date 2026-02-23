@@ -21,13 +21,13 @@
                 <div class="col-12">
                     <div class="d-flex justify-content-between mb-3">
                         <div>
-                            <button wire:click="create" class="btn btn-primary">Add Expense</button>
+                            <button wire:click="create" class="btn btn-primary">Add Expense <x-spinner for="create" /></button>
                         </div>
                         <div class="btn-group">
-                            <button wire:click="$set('filter', 'all')" class="btn btn-secondary {{ $filter === 'all' ? 'active' : '' }}">All</button>
-                            <button wire:click="$set('filter', 'today')" class="btn btn-secondary {{ $filter === 'today' ? 'active' : '' }}">Today</button>
-                            <button wire:click="$set('filter', 'week')" class="btn btn-secondary {{ $filter === 'week' ? 'active' : '' }}">This Week</button>
-                            <button wire:click="$set('filter', 'month')" class="btn btn-secondary {{ $filter === 'month' ? 'active' : '' }}">This Month</button>
+                            <button wire:click="$set('filter', 'all')" class="btn btn-secondary {{ $filter === 'all' ? 'active' : '' }}">All <x-spinner for="$set('filter', 'all')" /></button>
+                            <button wire:click="$set('filter', 'today')" class="btn btn-secondary {{ $filter === 'today' ? 'active' : '' }}">Today <x-spinner for="$set('filter', 'today')" /></button>
+                            <button wire:click="$set('filter', 'week')" class="btn btn-secondary {{ $filter === 'week' ? 'active' : '' }}">This Week <x-spinner for="$set('filter', 'week')" /></button>
+                            <button wire:click="$set('filter', 'month')" class="btn btn-secondary {{ $filter === 'month' ? 'active' : '' }}">This Month <x-spinner for="$set('filter', 'month')" /></button>
                         </div>
                     </div>
 
@@ -49,8 +49,8 @@
                                 @error('expense_date') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                                <button type="button" wire:click="cancel" class="btn btn-secondary">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save <x-spinner for="store" /></button>
+                                <button type="button" wire:click="cancel" class="btn btn-secondary">Cancel <x-spinner for="cancel" /></button>
                             </div>
                         </form>
                     </x-modal>
@@ -79,8 +79,8 @@
                                                 <td>{{ $expense->expense_date }}</td>
                                                 <td>{{ $expense->creator->name }}</td>
                                                 <td>
-                                                    <button wire:click="edit({{ $expense->id }})" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                                    <button wire:click="delete({{ $expense->id }})" class="btn btn-sm btn-outline-danger">Delete</button>
+                                                    <button wire:click="edit({{ $expense->id }})" class="btn btn-sm btn-outline-secondary">Edit <x-spinner for="edit({{ $expense->id }})" /></button>
+                                                    <button wire:click="delete({{ $expense->id }})" class="btn btn-sm btn-outline-danger">Delete <x-spinner for="delete({{ $expense->id }})" /></button>
                                                 </td>
                                             </tr>
                                         @empty

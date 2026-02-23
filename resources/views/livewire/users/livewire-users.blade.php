@@ -35,9 +35,7 @@
                             <div class="form-group">
                                 {{-- dev by Techlink360: Button to show create user form --}}
                                 <button class="btn btn-primary form-control" wire:click='create'>
-                                    <span wire:loading wire:target="create" class="spinner-border spinner-border-sm"
-                                        role="status" aria-hidden="true"></span>
-                                    add
+                                    add <x-spinner for="create" />
                                 </button>
                             </div>
 
@@ -93,23 +91,23 @@
                                                                     {{-- dev by Techlink360: Button to show edit user form --}}
                                                                     <a class="dropdown-item"
                                                                         wire:click="edit({{ $item->id }})"
-                                                                        href="#">Edit</a>
+                                                                        href="#">Edit <x-spinner for="edit({{ $item->id }})" /></a>
                                                                     {{-- dev by Techlink360: Button to delete user --}}
                                                                     <a class="dropdown-item"
                                                                         wire:click="delete({{ $item->id }})"
                                                                         wire:confirm="Are you sure you want to delete this user?"
-                                                                        href="#">Delete</a>
+                                                                        href="#">Delete <x-spinner for="delete({{ $item->id }})" /></a>
 
                                                                     @if ($item->status == true)
                                                                         {{-- dev by Techlink360: Button to deactivate user --}}
                                                                         <a class="dropdown-item"
                                                                             wire:click="deactivate({{ $item->id }})"
-                                                                            href="#">Deactivate</a>
+                                                                            href="#">Deactivate <x-spinner for="deactivate({{ $item->id }})" /></a>
                                                                     @else
                                                                         {{-- dev by Techlink360: Button to activate user --}}
                                                                         <a class="dropdown-item"
                                                                             wire:click="activate({{ $item->id }})"
-                                                                            href="#">Activate</a>
+                                                                            href="#">Activate <x-spinner for="activate({{ $item->id }})" /></a>
                                                                     @endif
                                                                 </div>
 
@@ -148,13 +146,9 @@
 
                                     <div class="form-group">
                                         <div class="btn-group">
-                                            {{-- dev by Techlink360: Button to cancel editing and return to all users view --}}
                                             <button class="btn btn-sm btn-primary form-control"
                                                 wire:click='cancel'>
-                                                <span wire:loading wire:target="cancel"
-                                                    class="spinner-border spinner-border-sm" role="status"
-                                                    aria-hidden="true"></span>
-                                                Back
+                                                Back <x-spinner for="cancel" />
                                             </button>
                                         </div>
                                     </div>
@@ -230,7 +224,7 @@
 
                                     <div class="form-group">
                                         {{-- dev by Techlink360: Button to update user --}}
-                                        <button type="submit" class="btn btn-dark">Update</button>
+                                        <button type="submit" class="btn btn-dark">Update <x-spinner for="update()" /></button>
                                     </div>
                                 </form>
                             </div>
@@ -253,10 +247,7 @@
                                             {{-- dev by Techlink360: Button to cancel creating and return to all users view --}}
                                             <button class="btn btn-sm btn-primary form-control"
                                                 wire:click='cancel'>
-                                                <span wire:loading wire:target="cancel"
-                                                    class="spinner-border spinner-border-sm" role="status"
-                                                    aria-hidden="true"></span>
-                                                Back
+                                                Back <x-spinner for="cancel" />
                                             </button>
                                         </div>
                                     </div>
@@ -332,7 +323,7 @@
 
                                     <div class="form-group">
                                         {{-- dev by Techlink360: Button to save new user --}}
-                                        <button type="submit" class="btn btn-dark">Save</button>
+                                        <button type="submit" class="btn btn-dark">Save <x-spinner for="store()" /></button>
                                     </div>
                                 </form>
                             </div>
