@@ -20,7 +20,7 @@
 
     <!-- Scripts -->
     <link rel="stylesheet" href="{{ asset('dist/webfont/tabler-icons.min.css') }}">
-    @vite(['dist/webfont/tabler-icons.min.css', 'dist/css/style.css', 'plugins/fontawesome-free/css/all.min.css'])
+    {{-- @vite(['dist/webfont/tabler-icons.min.css', 'dist/css/style.css', 'plugins/fontawesome-free/css/all.min.css']) --}}
 
     <!-- Styles -->
     @livewireStyles
@@ -64,7 +64,7 @@
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> {{ config('nativephp.version') }}
             </div>
-             <strong>© {{ date('Y') }} Built by <a href="http://techlink360.net" class="text-muted">Techlink360</a></strong> · 
+             <strong>© {{ date('Y') }} Built by <a href="http://techlink360.net" class="text-muted">Techlink360</a></strong> ·
         </footer>
 
         <!-- Control Sidebar -->
