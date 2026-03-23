@@ -42,7 +42,7 @@ Route::get('/', function () {
 // Route::get('/license.expired', function () {
 //     return "expired";
 // })->name('license.expired');
-Route::get('/license-manager', LicenseManagerLivewire::class)->name('license.manager')->middleware(CheckLicense::class);
+Route::get('/license-manager', LicenseManagerLivewire::class)->name('license.manager');//->middleware(CheckLicense::class);
 Route::get('/trial-blocked', TrialBlocked::class)->name('trial.blocked');
 Route::get('/about', \App\Livewire\AboutLivewire::class)->name('about');
 Route::get('/setup', UserSetupLivewire::class)->name('setup');
@@ -71,7 +71,7 @@ Route::middleware([
         ->name('returns.print');
     Route::get('/profile', \App\Livewire\Profile\ProfileLivewire::class)->name('profile');
     Route::get('/unauthorized', AccessLivewire::class)->name('unauthorized'); // dev by Techlink360
-    
+
 
     // ==============================
     // SYSTEM ADMIN ONLY
