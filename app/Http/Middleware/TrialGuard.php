@@ -16,28 +16,28 @@ class TrialGuard
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (app()->runningInConsole()) {
-            return $next($request);
-        }
+        // if (app()->runningInConsole()) {
+        //     return $next($request);
+        // }
 
-        if ($request->routeIs(
-            'login',
-            'register',
-            'trial.restore',
-            'trial.blocked'
-        )) {
-            return $next($request);
-        }
+        // if ($request->routeIs(
+        //     'login',
+        //     'register',
+        //     'trial.restore',
+        //     'trial.blocked'
+        // )) {
+        //     return $next($request);
+        // }
 
-        $license = License::first();
+        // $license = License::first();
 
-        if (! $license) {
-            return $next($request);
-        }
+        // if (! $license) {
+        //     return $next($request);
+        // }
 
-        if ($license->isTrialDisabled()) {
-            return redirect()->route('trial.blocked');
-        }
+        // if ($license->isTrialDisabled()) {
+        //     return redirect()->route('trial.blocked');
+        // }
 
         return $next($request);
     }
