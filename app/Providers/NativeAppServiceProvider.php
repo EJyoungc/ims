@@ -28,8 +28,8 @@ class NativeAppServiceProvider implements ProvidesPhpIni
             Menu::make(
                 Menu::route('setup', 'Setup'),
                 Menu::route('license.manager','License Manager'),
+                Menu::route('database.manager', 'Database Manager'),
                 Menu::route('about', 'About'),
-                
             )->label('Help')
 
             

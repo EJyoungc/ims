@@ -1,5 +1,4 @@
 <div>
-    <div>
 
         <section class="content-header">
             <div class="container-fluid">
@@ -219,7 +218,6 @@
                 </div>
             </div>
         </section>
-    </div>
 
     @script
     <script>

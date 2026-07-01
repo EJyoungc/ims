@@ -14,11 +14,19 @@ class DatabaseManagerLivewire extends Component
     use LivewireAlert;
 
     public array $backups = [];
+    public string $customDbPath = '';
+    public string $currentDbPath = '';
+    public bool $isConnected = true;
     protected const BACKUP_DIR = 'ims/backup';
 
     public function mount()
     {
         $this->loadBackups();
+        try {
+            $this->currentDbPath = $this->getDatabasePath();
+        } catch (\Throwable $e) {
+            $this->currentDbPath = 'Unknown';
+        }
     }
 
     // -------------------------
@@ -27,13 +35,61 @@ class DatabaseManagerLivewire extends Component
     public function dc()
     {
         $this->disconnectDatabase();
+        $this->isConnected = false;
         $this->alert('success', 'Database disconnected safely.');
     }
 
     public function rc()
     {
         $this->connectDatabase();
+        $this->isConnected = true;
         $this->alert('success', 'Database connected safely.');
+    }
+
+    public function connectCustomDatabase()
+    {
+        $this->validate([
+            'customDbPath' => 'required|string'
+        ]);
+
+        $path = trim($this->customDbPath);
+
+        if (!file_exists($path)) {
+            $this->alert('error', 'The database file does not exist at the specified path.');
+            return;
+        }
+
+        try {
+            $this->disconnectDatabase();
+
+            // Update .env file
+            $this->updateEnvDatabasePath($path);
+
+            // Reconfigure run-time config
+            config(['database.connections.sqlite.database' => $path]);
+
+            $this->connectDatabase();
+            $this->currentDbPath = $path;
+            $this->isConnected = true;
+            $this->customDbPath = '';
+            $this->alert('success', 'Connected to the selected database successfully.');
+        } catch (\Throwable $e) {
+            $this->alert('error', 'Connection failed: ' . $e->getMessage());
+        }
+    }
+
+    protected function updateEnvDatabasePath(string $newPath)
+    {
+        $envPath = base_path('.env');
+        if (file_exists($envPath)) {
+            $content = file_get_contents($envPath);
+            if (preg_match('/^DB_DATABASE=/m', $content)) {
+                $content = preg_replace('/^DB_DATABASE=.*$/m', "DB_DATABASE=" . $newPath, $content);
+            } else {
+                $content .= "\nDB_DATABASE=" . $newPath;
+            }
+            file_put_contents($envPath, $content);
+        }
     }
 
     protected function disconnectDatabase()

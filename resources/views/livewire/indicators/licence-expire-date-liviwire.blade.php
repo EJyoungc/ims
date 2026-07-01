@@ -1,5 +1,5 @@
-@if ($expiresAt)
-    <li class="nav-item d-flex align-items-center px-2" x-data="licenseCountdown('{{ $expiresAt }}', '{{ $type }}')" x-init="start()">
+<li class="nav-item d-flex align-items-center px-2" style="{{ $expiresAt ? '' : 'display: none;' }}" @if($expiresAt) x-data="licenseCountdown('{{ $expiresAt }}', '{{ $type }}')" x-init="start()" @endif>
+    @if ($expiresAt)
         <a href="{{ route('license.manager') }}">
             <span class="badge" :class="badgeClass">
                 <i class="fas fa-clock mr-1"></i>
@@ -39,5 +39,5 @@
                 }
             }
         </script>
-    </li>
-@endif
+    @endif
+</li>

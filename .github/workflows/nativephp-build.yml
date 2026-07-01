@@ -18,34 +18,34 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: mbstring, intl, fileinfo, openssl, pdo, pdo_mysql, zip, gd, pdo_sqlite, sqlite3, curl, sockets, json, date, xml, tokenizer, session, mbstring, iconv, simplexml, dom, xmlreader, xmlwriter, simplexml,
+          extensions: mbstring, intl, fileinfo, openssl, pdo, pdo_mysql, zip, gd, pdo_sqlite, sqlite3, curl, sockets, json, date, xml, tokenizer, session, iconv, simplexml, dom, xmlreader, xmlwriter
 
       - name: Install Composer Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: '22'
 
-      - name: Install Install NativePHP
+      - name: Copy Env File
+        run: copy .env.example .env
+
+      - name: Install NativePHP Scaffolding & Compile Plugin
         run: |
-          php artisan native:install
-          npm audit fix
-          npm i
-
-      - name: create database
-        run: php artisan migrate --force
+          php artisan native:install --no-interaction --force
+          npm install
+          npm run build
+          npm --prefix vendor/nativephp/desktop/resources/electron run plugin:build
 
       - name: Build NativePHP Windows Executable
-        run: php artisan native:build win x64 -vvv
+        run: php artisan native:build win x64 --no-interaction -vvv
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: NativePHP-Windows-EXE
-          path: nativephp/electron/dist/*
+          path: nativephp/electron/dist/*.exe
           retention-days: 2
 
   release:

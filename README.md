@@ -244,6 +244,16 @@ This project is proprietary software belonging to **TechLink360**.
 
 ---
 
+## ⚙️ Advanced Setup & Maintenance
+
+### Database Manager Settings
+The Database Manager is accessible via `/database/manager` or the Help menu:
+* **Backup Management**: Back up SQLite database files dynamically with automated timestamps.
+* **Restore Backups**: Perform atomic restoration of previous snapshots safely.
+* **Custom Connections**: Enter any absolute system path to an SQLite database file to disconnect from the active database and reconnect to your custom path. The system updates the local `.env` configuration file automatically.
+
+---
+
 ## 🏢 Developed By
 
 # **TechLink360**
@@ -251,15 +261,3 @@ This project is proprietary software belonging to **TechLink360**.
 🌐 [https://techlink360.net](https://techlink360.net)
 📧 [info@techlink360.net](mailto:info@techlink360.net)
 📍 Malawi
-
----
-
-If you'd like, I can also generate:
-
-✅ Setup wizard UI
-✅ Installer middleware
-✅ Database checker service
-✅ Owner-first-run redirect logic
-✅ GitHub repo structure
-
-Just tell me **"generate setup wizard"**.
