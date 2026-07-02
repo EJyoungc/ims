@@ -22,6 +22,18 @@ jobs:
 
       - name: Install Composer Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
+      - name: create Database
+        run: |
+          php artisan migrate --no-interaction --force
+          
+      - name: Setup Env and Database
+        shell: powershell
+        run: |
+          Copy-Item .env.example .env
+          php artisan key:generate --no-interaction
+          if (-not (Test-Path "database/database.sqlite")) {
+              New-Item -Path "database/database.sqlite" -ItemType "file"
+          }
 
       - name: create Database
         run: |
@@ -31,9 +43,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-
-      # - name: Copy Env File
-      #   run: copy .env.example .env
 
       - name: Install NativePHP Scaffolding & Compile Plugin
         run: |
