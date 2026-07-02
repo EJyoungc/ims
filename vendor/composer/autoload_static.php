@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2cdd639b895dd1dfff1e0a199bfda813
+class ComposerStaticInite13ab749ff7881e8af5e4a3cf20a1e1b
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -572,8 +572,8 @@ class ComposerStaticInit2cdd639b895dd1dfff1e0a199bfda813
         ),
         'Nette\\' => 
         array (
-            0 => __DIR__ . '/..' . '/nette/schema/src',
-            1 => __DIR__ . '/..' . '/nette/utils/src',
+            0 => __DIR__ . '/..' . '/nette/utils/src',
+            1 => __DIR__ . '/..' . '/nette/schema/src',
         ),
         'Native\\Desktop\\' => 
         array (
@@ -10009,10 +10009,10 @@ class ComposerStaticInit2cdd639b895dd1dfff1e0a199bfda813
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit2cdd639b895dd1dfff1e0a199bfda813::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit2cdd639b895dd1dfff1e0a199bfda813::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit2cdd639b895dd1dfff1e0a199bfda813::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit2cdd639b895dd1dfff1e0a199bfda813::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite13ab749ff7881e8af5e4a3cf20a1e1b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite13ab749ff7881e8af5e4a3cf20a1e1b::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInite13ab749ff7881e8af5e4a3cf20a1e1b::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInite13ab749ff7881e8af5e4a3cf20a1e1b::$classMap;
 
         }, null, ClassLoader::class);
     }
