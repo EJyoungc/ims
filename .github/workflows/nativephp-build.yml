@@ -36,6 +36,8 @@ jobs:
           php artisan native:install --no-interaction --force
           npm install
           npm run build
+          copy vendor/nativephp/desktop/resources/electron/.env.development vendor/nativephp/desktop/resources/electron/.env.production
+          copy vendor/nativephp/desktop/resources/electron/.env.development vendor/nativephp/desktop/resources/electron/.env
           npm --prefix vendor/nativephp/desktop/resources/electron run plugin:build
 
       - name: Build NativePHP Windows Executable
