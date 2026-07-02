@@ -28,8 +28,8 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Copy Env File
-        run: copy .env.example .env
+      # - name: Copy Env File
+      #   run: copy .env.example .env
 
       - name: Install NativePHP Scaffolding & Compile Plugin
         run: |
