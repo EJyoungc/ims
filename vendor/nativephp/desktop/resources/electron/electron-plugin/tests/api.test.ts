@@ -1,6 +1,7 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import startAPIServer, { APIProcess } from "../src/server/api";
-import axios from "axios";
+import axios from 'axios';
+import type { AddressInfo } from 'net';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import startAPIServer, { APIProcess } from '../src/server/api';
 
 vi.mock('electron-updater', () => {
     return {
@@ -21,7 +22,7 @@ describe('API test', () => {
     beforeEach(async () => {
         vi.resetModules();
         apiServer = await startAPIServer('randomSecret');
-        axios.defaults.baseURL = `http://localhost:${apiServer.port}`;
+        axios.defaults.baseURL = `http://127.0.0.1:${apiServer.port}`;
     });
 
     afterEach(async () => {
@@ -44,6 +45,13 @@ describe('API test', () => {
         nextApiProcess.server.close();
     });
 
+    it('binds the API server to the loopback interface', async () => {
+        const address = apiServer.server.address() as AddressInfo;
+
+        expect(address.address).toBe('127.0.0.1');
+        expect(address.address).not.toBe('0.0.0.0');
+    });
+
     it('protects API endpoints with a secret', async () => {
         try {
             await axios.get('/api/process');
@@ -56,7 +64,7 @@ describe('API test', () => {
             response = await axios.get('/api/process', {
                 headers: {
                     'x-nativephp-secret': 'randomSecret',
-                }
+                },
             });
         } finally {
             expect(response.status).toBe(200);

@@ -1,5 +1,5 @@
 {
-    "name": "ims-dev",
+    "name": "ims",
     "version": "1.0.8",
     "description": "Inventory Management System Dev By Techlink360",
     "main": "./out/main/index.js",
@@ -22,7 +22,8 @@
         "publish:mac": "cross-env npm run publish:mac-arm64 -- --x64",
         "publish:mac-arm64": "cross-env npm run build && cross-env node ./node_modules/electron-builder/cli.js -p always --mac --config electron-builder.mjs --arm64 -p always",
         "publish:mac-x64": "cross-env npm run build && cross-env node ./node_modules/electron-builder/cli.js -p always --mac --config electron-builder.mjs --x64 -p always",
-        "publish:linux": "cross-env npm run publish:linux-x64",
+        "publish:linux": "cross-env npm run publish:linux-x64 -- --arm64",
+        "publish:linux-arm64": "cross-env npm run build && cross-env node ./node_modules/electron-builder/cli.js -p always --linux --config electron-builder.mjs --arm64 -p always",
         "publish:linux-x64": "cross-env npm run build && cross-env node ./node_modules/electron-builder/cli.js --linux --config electron-builder.mjs --x64 -p always",
         "build:all": "cross-env npm run build:mac && cross-env npm run build:win && cross-env npm run build:linux",
         "build:win": "cross-env npm run build:win-x64",
@@ -30,7 +31,8 @@
         "build:mac": "cross-env npm run build:mac-arm64 -- --x64",
         "build:mac-arm64": "cross-env npm run build && cross-env node ./node_modules/electron-builder/cli.js -p never --mac --config electron-builder.mjs --arm64",
         "build:mac-x64": "cross-env npm run build && cross-env node ./node_modules/electron-builder/cli.js -p never --mac --config electron-builder.mjs --x64",
-        "build:linux": "cross-env npm run build:linux-x64",
+        "build:linux": "cross-env npm run build:linux-x64 -- --arm64",
+        "build:linux-arm64": "cross-env npm run build && cross-env node ./node_modules/electron-builder/cli.js -p never --linux --config electron-builder.mjs --arm64",
         "build:linux-x64": "cross-env npm run build && cross-env node ./node_modules/electron-builder/cli.js -p never --linux --config electron-builder.mjs --x64",
         "plugin:build": "rimraf electron-plugin/dist/ && node node_modules/typescript/bin/tsc --project electron-plugin",
         "plugin:build:watch": "npm run plugin:build -- -W",
@@ -42,16 +44,18 @@
         "@electron-toolkit/utils": "^4.0.0",
         "@electron/remote": "^2.1.2",
         "axios": "^1.7.9",
-        "body-parser": "^2.2.0",
+        "body-parser": "^2.2.1",
         "electron-context-menu": "^4.0.4",
         "electron-store": "^10.0.0",
         "electron-updater": "^6.3.9",
         "electron-window-state": "^5.0.3",
         "express": "^5.1.0",
+        "fix-path": "^5.0.0",
         "fs-extra": "^11.2.0",
         "get-port": "^7.1.0",
         "kill-sync": "^1.0.3",
         "nodemon": "^3.1.9",
+        "play-sound": "^1.1.3",
         "ps-node": "^0.1.6",
         "tree-kill": "^1.2.2",
         "yauzl": "^3.2.0"
@@ -76,7 +80,7 @@
         "@vue/eslint-config-prettier": "^10.1.0",
         "cross-env": "^10.0.0",
         "electron": "^38.0.0",
-        "electron-builder": "^25.1.8",
+        "electron-builder": "^26.0.0",
         "electron-chromedriver": "^38.0.0",
         "electron-vite": "^4.0.0",
         "eslint": "^9.17.0",
@@ -86,6 +90,7 @@
         "globals": "^16.0.0",
         "less": "^4.2.1",
         "prettier": "^3.4.2",
+        "prettier-plugin-organize-imports": "^4.3",
         "rimraf": "^6.0.1",
         "stylelint": "^16.12.0",
         "stylelint-config-recommended": "^16.0.0",
@@ -101,6 +106,5 @@
     "exports": "./electron-plugin/dist/index.js",
     "imports": {
         "#plugin": "./electron-plugin/dist/index.js"
-    },
-    "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+    }
 }

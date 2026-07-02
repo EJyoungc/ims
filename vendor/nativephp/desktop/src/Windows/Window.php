@@ -2,6 +2,7 @@
 
 namespace Native\Desktop\Windows;
 
+use Illuminate\Support\Traits\Conditionable;
 use Native\Desktop\Client\Client;
 use Native\Desktop\Concerns\HasDimensions;
 use Native\Desktop\Concerns\HasUrl;
@@ -10,6 +11,7 @@ use Native\Desktop\Facades\Window as WindowFacade;
 
 class Window
 {
+    use Conditionable;
     use HasDimensions;
     use HasUrl {
         HasUrl::url as defaultUrl;
@@ -57,6 +59,8 @@ class Window
     protected string $titleBarStyle = 'default';
 
     protected array $trafficLightPosition = [];
+
+    protected bool $windowButtonVisibility = true;
 
     protected string $title = '';
 
@@ -144,6 +148,18 @@ class Window
     public function trafficLightPosition(int $x, int $y): self
     {
         $this->trafficLightPosition = ['x' => $x, 'y' => $y];
+
+        return $this;
+    }
+
+    public function trafficLightsHidden(): self
+    {
+        return $this->windowButtonVisibility(false);
+    }
+
+    public function windowButtonVisibility($visible = true): self
+    {
+        $this->windowButtonVisibility = $visible;
 
         return $this;
     }
@@ -390,6 +406,7 @@ class Window
             'frame' => $this->frame,
             'titleBarStyle' => $this->titleBarStyle,
             'trafficLightPosition' => $this->trafficLightPosition,
+            'windowButtonVisibility' => $this->windowButtonVisibility,
             'showDevTools' => $this->showDevTools,
             'vibrancy' => $this->vibrancy,
             'transparency' => $this->transparent,

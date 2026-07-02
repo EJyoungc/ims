@@ -2,10 +2,13 @@
 
 namespace Native\Desktop;
 
+use Illuminate\Support\Traits\Conditionable;
 use Native\Desktop\Client\Client;
 
 class Notification
 {
+    use Conditionable;
+
     public ?string $reference = null;
 
     protected string $title;
@@ -13,6 +16,10 @@ class Notification
     protected string $body;
 
     protected string $event = '';
+
+    protected string $sound = '';
+
+    protected bool $silent = false;
 
     private bool $hasReply = false;
 
@@ -51,6 +58,20 @@ class Notification
         return $this;
     }
 
+    public function sound(string $sound): self
+    {
+        $this->sound = $sound;
+
+        return $this;
+    }
+
+    public function silent(bool $silent = true): self
+    {
+        $this->silent = $silent;
+
+        return $this;
+    }
+
     public function hasReply(string $placeholder = ''): self
     {
         $this->hasReply = true;
@@ -80,6 +101,8 @@ class Notification
             'title' => $this->title,
             'body' => $this->body,
             'event' => $this->event,
+            'sound' => $this->sound,
+            'silent' => $this->silent,
             'hasReply' => $this->hasReply,
             'replyPlaceholder' => $this->replyPlaceholder,
             'actions' => array_map(fn (string $label) => [
