@@ -23,6 +23,10 @@ jobs:
       - name: Install Composer Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
+      - name: create Database
+        run: |
+          php artisan migrate --no-interaction --force
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
