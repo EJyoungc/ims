@@ -157,6 +157,7 @@ return [
         'npm run build',
         'php artisan optimize',
         'php artisan config:clear',
+        'php artisan migrate',
         'php artisan migrate:fresh',
     ],
 
